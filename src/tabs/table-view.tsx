@@ -9,8 +9,7 @@ const TablePage = () => {
 
     const fetchData = async () => {
       const storage = new Storage();
-      const dataString = await storage.get("tableData");
-      const data = dataString ? JSON.parse(dataString) : [];
+      const data = await storage.get("tableData");
 
       if (!data || data.length === 0) {
         console.warn("[New Tab] No table data found in storage.");
@@ -42,7 +41,7 @@ const TablePage = () => {
             {tableData.map((row, index) => (
               <tr key={index}>
                 {Object.values(row).map((value, i) => (
-                  <td key={i} className="border p-2">{value as React.ReactNode}</td>
+                  <td key={i} className="border p-2">{value}</td>
                 ))}
               </tr>
             ))}
