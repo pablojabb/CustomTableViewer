@@ -3,19 +3,27 @@ import { useReducer } from "react"
 import "index.css"
 
 function IndexPopup() {
-  const [count, increase] = useReducer((c) => c + 1, 0)
-
+  const handleClick = async () => {
+    // Send a message to background script to open new tab
+    chrome.runtime.sendMessage({ action: "openNewTab" }, (response) => {
+      if (chrome.runtime.lastError) {
+        console.error(
+          "[Content Script] Error sending message:",
+          chrome.runtime.lastError
+        )
+      } else {
+        console.log(
+          "[Content Script] Sent message to open new tab, response:",
+          response
+        )
+      }
+    })
+  }
 
   return (
-    <button 
-    className="p-4 rounded-lg m-3 bg-gray-400"
-        onClick={() => {
-          chrome.tabs.create({
-            url: "./tabs/table-view.html"
-          })
-        }}>
-        open tab page
-      </button>
+    <button className="p-4 rounded-lg m-3 bg-gray-400" onClick={handleClick}>
+      Run Content Script
+    </button>
   )
 }
 
