@@ -7,7 +7,8 @@ function IndexPopup() {
 
 
   return (
-    <button
+    <button 
+    className="p-4 rounded-lg m-3 bg-gray-400"
         onClick={() => {
           chrome.tabs.create({
             url: "./tabs/table-view.html"
