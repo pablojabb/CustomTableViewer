@@ -20,6 +20,9 @@ function IndexPopup() {
     })
   }
 
+  //TODO: Clear storage if tab is closed
+  //TODO: No table render diff panel
+
   return (
     <button className="p-4 rounded-lg m-3 bg-gray-400" onClick={handleClick}>
       Run Content Script
