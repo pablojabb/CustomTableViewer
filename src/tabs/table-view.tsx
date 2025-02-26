@@ -24,6 +24,7 @@ const TablePage = () => {
   }, []);
 
   return (
+   <>
     <div className="p-4">
       <h1 className="text-xl font-bold mb-4">Extracted Table Data</h1>
       {tableData.length === 0 ? (
@@ -48,7 +49,9 @@ const TablePage = () => {
           </tbody>
         </table>
       )}
+       <div><button></button></div>
     </div>
+   </>
   );
 };
 
