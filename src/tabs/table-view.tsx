@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Storage } from "@plasmohq/storage";
+import "../index.css"
+
 
 const TablePage = () => {
   const [tableData, setTableData] = useState([]);
