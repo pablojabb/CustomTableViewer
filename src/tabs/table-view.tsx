@@ -3,12 +3,12 @@ import { Storage } from "@plasmohq/storage";
 
 const TablePage = () => {
   const [tableData, setTableData] = useState([]);
+  const storage = new Storage();
 
   useEffect(() => {
     console.log("[New Tab] Loading table data from storage...");
 
     const fetchData = async () => {
-      const storage = new Storage();
       const data = await storage.get("tableData");
 
       if (!data || data.length === 0) {
@@ -21,10 +21,27 @@ const TablePage = () => {
     };
 
     fetchData();
+
+    // Cleanup storage when the tab is closed
+    const handleTabClose = async () => {
+      console.log("[New Tab] Clearing storage before tab closes.");
+      await storage.remove("tableData");
+    };
+
+    window.addEventListener("beforeunload", handleTabClose);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleTabClose);
+    };
   }, []);
 
+  const handleCloseTab = async () => {
+    await storage.remove("tableData");
+    console.log("[New Tab] Storage cleared.");
+    window.close();
+  };
+
   return (
-   <>
     <div className="p-4">
       <h1 className="text-xl font-bold mb-4">Extracted Table Data</h1>
       {tableData.length === 0 ? (
@@ -49,9 +66,15 @@ const TablePage = () => {
           </tbody>
         </table>
       )}
-       <div><button></button></div>
+      <div className="mt-4">
+        <button 
+          className="px-4 py-2 bg-red-500 text-white rounded"
+          onClick={handleCloseTab}
+        >
+          Close Tab
+        </button>
+      </div>
     </div>
-   </>
   );
 };
 
