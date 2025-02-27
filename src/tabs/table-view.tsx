@@ -19,11 +19,10 @@ const TablePage = () => {
 
       console.log("[New Tab] Retrieved table data:", data);
 
-      // Filter data to only include specific columns
+      // Merge "Sec" and "Subjcode" into "Sec-Subjcode"
       const filteredData = data.map((row) => ({
         Days: row["Days"] || "",
-        Sec: row["Sec."] || "",
-        Subjcode: row["Subjcode"] || "",
+        "Sec-Subjcode": `${row["Sec."] || ""}-${row["Subjcode"] || ""}`.trim(), // Merge with hyphen
         Time: row["Time"] || ""
       }));
 
@@ -60,7 +59,7 @@ const TablePage = () => {
         <table className="w-full border-collapse border border-gray-300">
           <thead>
             <tr>
-              {["Days", "Sec", "Subjcode", "Time"].map((key) => (
+              {["Days", "Sec-Subjcode", "Time"].map((key) => (
                 <th key={key} className="border p-2">{key}</th>
               ))}
             </tr>
@@ -68,7 +67,7 @@ const TablePage = () => {
           <tbody>
             {tableData.map((row, index) => (
               <tr key={index}>
-                {["Days", "Sec", "Subjcode", "Time"].map((key) => (
+                {["Days", "Sec-Subjcode", "Time"].map((key) => (
                   <td key={key} className="border p-2">{row[key]}</td>
                 ))}
               </tr>
