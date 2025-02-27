@@ -22,7 +22,7 @@ const TablePage = () => {
       // Filter data to only include specific columns
       const filteredData = data.map((row) => ({
         Days: row["Days"] || "",
-        Sec: row["Sec"] || "",
+        Sec: row["Sec."] || "",
         Subjcode: row["Subjcode"] || "",
         Time: row["Time"] || ""
       }));
