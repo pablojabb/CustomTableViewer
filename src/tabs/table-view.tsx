@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Storage } from "@plasmohq/storage";
-import "../index.css"
-
+import "../index.css";
 
 const TablePage = () => {
   const [tableData, setTableData] = useState([]);
@@ -19,7 +18,16 @@ const TablePage = () => {
       }
 
       console.log("[New Tab] Retrieved table data:", data);
-      setTableData(data);
+
+      // Filter data to only include specific columns
+      const filteredData = data.map((row) => ({
+        Days: row["Days"] || "",
+        Sec: row["Sec"] || "",
+        Subjcode: row["Subjcode"] || "",
+        Time: row["Time"] || ""
+      }));
+
+      setTableData(filteredData);
     };
 
     fetchData();
@@ -52,7 +60,7 @@ const TablePage = () => {
         <table className="w-full border-collapse border border-gray-300">
           <thead>
             <tr>
-              {Object.keys(tableData[0]).map((key) => (
+              {["Days", "Sec", "Subjcode", "Time"].map((key) => (
                 <th key={key} className="border p-2">{key}</th>
               ))}
             </tr>
@@ -60,8 +68,8 @@ const TablePage = () => {
           <tbody>
             {tableData.map((row, index) => (
               <tr key={index}>
-                {Object.values(row).map((value, i) => (
-                  <td key={i} className="border p-2">{value}</td>
+                {["Days", "Sec", "Subjcode", "Time"].map((key) => (
+                  <td key={key} className="border p-2">{row[key]}</td>
                 ))}
               </tr>
             ))}
