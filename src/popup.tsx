@@ -1,32 +1,45 @@
-import { useReducer } from "react"
-
 import "index.css"
 
 function IndexPopup() {
   const handleClick = async () => {
-    // Send a message to background script to open new tab
+    handleExtractTable()
+    // Send a message to the background script to open a new tab
     chrome.runtime.sendMessage({ action: "openNewTab" }, (response) => {
       if (chrome.runtime.lastError) {
         console.error(
-          "[Content Script] Error sending message:",
+          "[Popup] Error sending message to background:",
           chrome.runtime.lastError
         )
       } else {
-        console.log(
-          "[Content Script] Sent message to open new tab, response:",
-          response
-        )
+        console.log("[Popup] Sent message to open new tab, response:", response)
       }
     })
   }
 
-  //TODO: Clear storage if tab is closed
-  //TODO: No table render diff panel
+  const handleExtractTable = async () => {
+    // Send a message to the content script to extract table data
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      if (tabs.length === 0) return
+
+      chrome.tabs.sendMessage(tabs[0].id, { action: "extract_table" }, (response) => {
+        if (chrome.runtime.lastError) {
+          console.error("[Popup] Error sending message to content script:", chrome.runtime.lastError)
+        } else {
+          console.log("[Popup] Triggered table extraction, response:", response)
+        }
+      })
+    })
+  }
 
   return (
-    <button className="p-4 rounded-lg m-3 bg-gray-400" onClick={handleClick}>
-      Run Content Script
-    </button>
+    <div className="p-4">
+      <button className="p-4 rounded-lg m-3 bg-gray-400" onClick={handleClick}>
+        Open Table Page
+      </button>
+      {/* <button className="p-4 rounded-lg m-3 bg-blue-500 text-white" onClick={handleExtractTable}>
+        Extract Table Data
+      </button> */}
+    </div>
   )
 }
 

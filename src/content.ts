@@ -6,8 +6,8 @@ export const config: PlasmoCSConfig = {
   all_frames: true
 };
 
-window.onload = async () => {
-  console.log("[Content Script] Loaded and running...");
+const extractTableData = async () => {
+  console.log("[Content Script] Running extraction...");
 
   const storage = new Storage();
   const tables = document.querySelectorAll("table");
@@ -33,6 +33,14 @@ window.onload = async () => {
   // Store the data in Plasmo Storage
   await storage.set("tableData", rows);
   console.log("[Content Script] Table data saved in storage.");
+};
 
-  
-}  
+// Run on page load
+window.onload = extractTableData;
+
+// Listen for messages from the popup
+chrome.runtime.onMessage.addListener((message) => {
+  if (message.action === "extract_table") {
+    extractTableData();
+  }
+});
