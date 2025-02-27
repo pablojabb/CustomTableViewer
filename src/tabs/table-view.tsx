@@ -1,55 +1,57 @@
-import { useEffect, useState } from "react";
-import { Storage } from "@plasmohq/storage";
-import "../index.css";
+import { useEffect, useState } from "react"
+
+import { Storage } from "@plasmohq/storage"
+
+import "../index.css"
 
 const TablePage = () => {
-  const [tableData, setTableData] = useState([]);
-  const storage = new Storage();
+  const [tableData, setTableData] = useState([])
+  const storage = new Storage()
 
   useEffect(() => {
-    console.log("[New Tab] Loading table data from storage...");
+    console.log("[New Tab] Loading table data from storage...")
 
     const fetchData = async () => {
-      const data = await storage.get("tableData");
+      const data = await storage.get("tableData")
 
       if (!data || data.length === 0) {
-        console.warn("[New Tab] No table data found in storage.");
-        return;
+        console.warn("[New Tab] No table data found in storage.")
+        return
       }
 
-      console.log("[New Tab] Retrieved table data:", data);
+      console.log("[New Tab] Retrieved table data:", data)
 
       // Filter data to only include specific columns
       const filteredData = data.map((row) => ({
         Days: row["Days"] || "",
-        Sec: row["Sec."] || "",
         Subjcode: row["Subjcode"] || "",
+        Sec: row["Sec."] || "",
         Time: row["Time"] || ""
-      }));
+      }))
 
-      setTableData(filteredData);
-    };
+      setTableData(filteredData)
+    }
 
-    fetchData();
+    fetchData()
 
     // Cleanup storage when the tab is closed
     const handleTabClose = async () => {
-      console.log("[New Tab] Clearing storage before tab closes.");
-      await storage.remove("tableData");
-    };
+      console.log("[New Tab] Clearing storage before tab closes.")
+      await storage.remove("tableData")
+    }
 
-    window.addEventListener("beforeunload", handleTabClose);
+    window.addEventListener("beforeunload", handleTabClose)
 
     return () => {
-      window.removeEventListener("beforeunload", handleTabClose);
-    };
-  }, []);
+      window.removeEventListener("beforeunload", handleTabClose)
+    }
+  }, [])
 
   const handleCloseTab = async () => {
-    await storage.remove("tableData");
-    console.log("[New Tab] Storage cleared.");
-    window.close();
-  };
+    await storage.remove("tableData")
+    console.log("[New Tab] Storage cleared.")
+    window.close()
+  }
 
   return (
     <div className="p-4">
@@ -61,7 +63,9 @@ const TablePage = () => {
           <thead>
             <tr>
               {["Days", "Sec", "Subjcode", "Time"].map((key) => (
-                <th key={key} className="border p-2">{key}</th>
+                <th key={key} className="border p-2">
+                  {key}
+                </th>
               ))}
             </tr>
           </thead>
@@ -69,7 +73,9 @@ const TablePage = () => {
             {tableData.map((row, index) => (
               <tr key={index}>
                 {["Days", "Sec", "Subjcode", "Time"].map((key) => (
-                  <td key={key} className="border p-2">{row[key]}</td>
+                  <td key={key} className="border p-2">
+                    {row[key]}
+                  </td>
                 ))}
               </tr>
             ))}
@@ -77,15 +83,14 @@ const TablePage = () => {
         </table>
       )}
       <div className="mt-4">
-        <button 
+        <button
           className="px-4 py-2 bg-red-500 text-white rounded"
-          onClick={handleCloseTab}
-        >
+          onClick={handleCloseTab}>
           Close Tab
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TablePage;
+export default TablePage
