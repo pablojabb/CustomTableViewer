@@ -81,6 +81,7 @@ const TablePage = () => {
           onClick={handleCloseTab}
         >
           <div></div>
+          <div></div>
           Close Tab
         </button>
       </div>
