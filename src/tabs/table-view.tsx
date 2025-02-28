@@ -82,6 +82,7 @@ const TablePage = () => {
         >
           <div></div>
           <div></div>
+          <div></div>
           Close Tab
         </button>
       </div>
