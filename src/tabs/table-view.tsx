@@ -80,7 +80,6 @@ const TablePage = () => {
           className="px-4 py-2 bg-red-500 text-white rounded"
           onClick={handleCloseTab}
         >
-          <div></div>
          
          
           Close Tab
