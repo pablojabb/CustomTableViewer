@@ -52,7 +52,8 @@ function IndexPopup() {
             Visualize your schedule and detect conflicts with a structured
             custom table viewer.
           </p>
-
+        </div>
+        <div className="w-full flex gap-3 justify-center items-center">
           <button
             className="p-3 rounded-lg my-2 bg-blue-500 text-white"
             onClick={handleExtractTable}>
@@ -60,7 +61,7 @@ function IndexPopup() {
           </button>
 
           <button
-            className="p-3 rounded-lg my-2 bg-gray-400 "
+            className="p-3 rounded-lg my-2 bg-gray-400 text-white"
             onClick={handleClick}>
             Open Table Page
           </button>
