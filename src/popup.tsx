@@ -32,14 +32,19 @@ function IndexPopup() {
   }
 
   return (
-    <div className="p-4">
-      <button className="p-4 rounded-lg m-3 bg-gray-400" onClick={handleClick}>
+   <>
+    <div className=" w-64 h-full flex-col justify-center items-center">
+      
+      <div className="w-f flex-col justify-center items-center"> 
+        <button className="p-4 rounded-lg  bg-gray-400" onClick={handleClick}>
         Open Table Page
-      </button>
+      </button></div>
+     
       {/* <button className="p-4 rounded-lg m-3 bg-blue-500 text-white" onClick={handleExtractTable}>
         Extract Table Data
       </button> */}
     </div>
+   </>
   )
 }
 
