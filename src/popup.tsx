@@ -49,19 +49,22 @@ function IndexPopup() {
             Custom Table Viewer
           </h1>
           <p className="text-sm text-gray-700 text-center px-4 mb-3">
-             Visualize your schedule and detect conflicts with a
-            structured custom table viewer.
+            Visualize your schedule and detect conflicts with a structured
+            custom table viewer.
           </p>
+
           <button
-            className="p-3 rounded-lg mb-2 bg-gray-400"
+            className="p-3 rounded-lg my-2 bg-blue-500 text-white"
+            onClick={handleExtractTable}>
+            Extract Table Data
+          </button>
+
+          <button
+            className="p-3 rounded-lg my-2 bg-gray-400 "
             onClick={handleClick}>
             Open Table Page
           </button>
         </div>
-
-        {/* <button className="p-4 rounded-lg m-3 bg-blue-500 text-white" onClick={handleExtractTable}>
-        Extract Table Data
-      </button> */}
       </div>
     </>
   )
