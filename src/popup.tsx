@@ -69,7 +69,7 @@ function IndexPopup() {
           </button>
         </div>
         <footer className="w-full flex justify-center items-center mt-4 bg-gray-600">
-          <h1 className="text-sm font-serif mb-1 mt-2 text-center px-2">Made with <span className="inline-block animate-pulse">❤️‍🔥</span>—<a href="">pablojabb</a></h1>
+          <h1 className="text-sm font-serif mb-1 mt-2 text-center px-2">Made with <span className="inline-block animate-pulse">❤️‍🔥</span>—<a href="https://github.com/pablojabb">pablojabb</a></h1>
         </footer>
       </div>
     </>
