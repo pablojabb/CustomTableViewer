@@ -55,17 +55,17 @@ function IndexPopup() {
         </header>
        <ReadMoreAccordion />
         <div className="w-[80%] mt-3  ">
-          <h1 className="text-lg font-semibold text-left text-light-important-text dark:text-dark-important-text ">Status:</h1>
+          <h1 className="text-lg font-semibold text-left text-light-important-text dark:text-dark-important-text ">Status: </h1>
         </div>
         <div className="w-[80%] flex justify-between items-center">
           <button
-            className="px-1.5 py-3 text-sm hover:contrast-125 transition-colors rounded-md my-2 font-semibold bg-light-m-btn dark:bg-dark-m-btn text-light-important-text dark:text-light-important-text"
+            className="px-1.5 py-3 text-sm hover:brightness-90 darK:hover:brightness-115 transition-colors rounded-md my-2 font-semibold bg-light-m-btn dark:bg-dark-m-btn text-light-important-text dark:text-light-important-text"
             onClick={handleExtractTable}>
             Extract Table Data
           </button>
 
           <button
-            className="px-1.5 py-3 hover:brightness-125 transition-colors text-sm rounded-md my-2 font-semibold bg-light-s-btn dark:bg-dark-s-btn text-light-important-text dark:text-dark-important-text"
+            className="px-1.5 py-3 dark:hover:brightness-120 hover:brightness-90 transition-colors text-sm rounded-md my-2 font-semibold bg-light-s-btn dark:bg-dark-s-btn text-light-important-text dark:text-dark-important-text"
             onClick={handleClick}>
             Open Table Page
           </button>
