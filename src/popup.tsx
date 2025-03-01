@@ -43,7 +43,7 @@ function IndexPopup() {
 
   return (
     <>
-      <div className=" w-80 h-full flex flex-col justify-center items-center rounded-lg ">
+      <div className="w-80 h-full flex flex-col justify-center items-center rounded-lg dark:bg-dark-bg">
         <header className="w-full flex mb-2 justify-between items-center bg-gray-600">
           <h1 className="text-xl font-bold my-1  text-center px-2">CTV</h1>
           <h1 className="text-sm text-gray-700 text-center px-2">Theme btn</h1>
@@ -69,7 +69,16 @@ function IndexPopup() {
           </button>
         </div>
         <footer className="w-full flex justify-center items-center mt-4 bg-gray-600">
-          <h1 className="text-sm font-serif mb-1 mt-2 text-center px-2">Made with <span className="inline-block animate-pulse">❤️‍🔥</span>—<a href="https://github.com/pablojabb">pablojabb</a></h1>
+          <h1 className="text-sm font-sans font-medium mb-1 mt-2 text-center px-2">
+            Made with <span className="inline-block animate-pulse">❤️‍🔥</span> by {" "}
+            <a
+            className="font-semibold hover:underline underline-offset-4"
+              href="https://github.com/pablojabb"
+              target="_blank"
+              rel="noopener noreferrer">
+               @pablojabb
+            </a>
+          </h1>
         </footer>
       </div>
     </>
