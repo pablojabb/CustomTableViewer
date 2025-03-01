@@ -1,5 +1,7 @@
 import "index.css"
-import DarkModeToggle from './DarkModeToggle ';
+
+import DarkModeToggle from "./DarkModeToggle "
+import ReadMoreAccordion from "~ReadMoreAccordion"
 
 function IndexPopup() {
   const handleClick = async () => {
@@ -44,40 +46,39 @@ function IndexPopup() {
 
   return (
     <>
-      <div className="w-80 h-full flex flex-col justify-center items-center rounded-lg dark:bg-dark-bg">
-        <header className="w-full flex mb-2 justify-between items-center bg-gray-600">
-          <h1 className="text-xl font-bold my-1  text-center px-2">CTV</h1>
+      <div className="w-80 h-full flex flex-col justify-center items-center bg-light-bg dark:bg-dark-bg">
+        <header className="w-full flex mb-2 justify-between items-center ">
+          <h1 className="text-lg font-bold my-1 text-light-text dark:text-dark-text text-center px-2">
+            CTV
+          </h1>
           <DarkModeToggle />
         </header>
-        <div className="w-[95%] flex rounded-lg justify-between items-center p-3 my-2 bg-blue-400">
-          <p className="text-sm text-gray-700 text-center ">How to use?</p>
-          <p className="text-sm text-gray-700 text-center  ">down icon</p>
-        </div>
-        <div className="w-[80%] mt-3 bg-green-100 ">
-          <h1 className="text-lg font-bold text-left ">Status:</h1>
+       <ReadMoreAccordion />
+        <div className="w-[80%] mt-3  ">
+          <h1 className="text-lg font-semibold text-left text-light-important-text dark:text-dark-important-text ">Status:</h1>
         </div>
         <div className="w-[80%] flex justify-between items-center">
           <button
-            className="p-3 rounded-lg my-2 bg-blue-500 text-white"
+            className="p-3 rounded-md my-2 font-semibold bg-light-m-btn dark:bg-dark-m-btn text-light-important-text dark:text-light-important-text"
             onClick={handleExtractTable}>
             Extract Table Data
           </button>
 
           <button
-            className="p-3 rounded-lg my-2 bg-gray-400 text-white"
+            className="p-3 rounded-md my-2 font-semibold bg-light-s-btn dark:bg-dark-s-btn text-light-important-text dark:text-dark-important-text"
             onClick={handleClick}>
             Open Table Page
           </button>
         </div>
         <footer className="w-full flex justify-center items-center mt-4 bg-gray-600">
           <h1 className="text-sm font-sans font-medium mb-1 mt-2 text-center px-2">
-            Made with <span className="inline-block animate-pulse">❤️‍🔥</span> by {" "}
+            Made with <span className="inline-block animate-pulse">❤️‍🔥</span> by{" "}
             <a
-            className="font-semibold hover:underline underline-offset-4"
+              className="font-semibold hover:underline underline-offset-4"
               href="https://github.com/pablojabb"
               target="_blank"
               rel="noopener noreferrer">
-               @pablojabb
+              @pablojabb
             </a>
           </h1>
         </footer>

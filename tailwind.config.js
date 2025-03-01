@@ -16,10 +16,10 @@ module.exports = {
         },
         dark: {
           bg: "#121212",
-          text: "#a79f8f",
+          text: "#c0c0c0",
           "m-btn": "#b8daff",
           "s-btn": "#222222",
-          "content-bg": "#8190a0",
+          "content-bg": "#8190a0", 
           "content-text": "#0a2f59",
           "important-text": "#e1e2e1",
         },
