@@ -1,4 +1,5 @@
 import "index.css"
+import DarkModeToggle from './DarkModeToggle ';
 
 function IndexPopup() {
   const handleClick = async () => {
@@ -46,7 +47,7 @@ function IndexPopup() {
       <div className="w-80 h-full flex flex-col justify-center items-center rounded-lg dark:bg-dark-bg">
         <header className="w-full flex mb-2 justify-between items-center bg-gray-600">
           <h1 className="text-xl font-bold my-1  text-center px-2">CTV</h1>
-          <h1 className="text-sm text-gray-700 text-center px-2">Theme btn</h1>
+          <DarkModeToggle />
         </header>
         <div className="w-[95%] flex rounded-lg justify-between items-center p-3 my-2 bg-blue-400">
           <p className="text-sm text-gray-700 text-center ">How to use?</p>
