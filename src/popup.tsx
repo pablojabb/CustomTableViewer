@@ -1,10 +1,16 @@
 import "index.css"
 
-import DarkModeToggle from "./DarkModeToggle "
+import { useState } from "react"
+
 import ReadMoreAccordion from "~ReadMoreAccordion"
 
+import DarkModeToggle from "./DarkModeToggle "
+
 function IndexPopup() {
+  const [status, setStatus] = useState("No table data extracted")
+
   const handleClick = async () => {
+    if (status === "Table data ready in new page") return
     handleExtractTable()
     // Send a message to the background script to open a new tab
     chrome.runtime.sendMessage({ action: "openNewTab" }, (response) => {
@@ -38,6 +44,7 @@ function IndexPopup() {
               "[Popup] Triggered table extraction, response:",
               response
             )
+            setStatus("Table data ready in new page")
           }
         }
       )
@@ -53,9 +60,11 @@ function IndexPopup() {
           </h1>
           <DarkModeToggle />
         </header>
-       <ReadMoreAccordion />
+        <ReadMoreAccordion />
         <div className="w-[80%] mt-3  ">
-          <h1 className="text-lg font-semibold text-left text-light-important-text dark:text-dark-important-text ">Status: </h1>
+          <h1 className="text-lg font-semibold text-left text-light-important-text dark:text-dark-important-text ">
+            Status: <span className="font-normal text-base ">{status}</span>
+          </h1>
         </div>
         <div className="w-[80%] flex justify-between items-center">
           <button
