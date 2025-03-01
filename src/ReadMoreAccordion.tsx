@@ -19,7 +19,7 @@ const ReadMoreAccordion = () => {
         )}
       </div>
       {isOpen && (
-        <p className="mt-2 text-xs dark:text-dark-content-text text-light-content-text cursor-default">
+        <p className="mt-2 text-sm font-sans dark:text-dark-content-text text-light-content-text cursor-default">
           1st step: This is a guide on how to use the feature. Click the arrow. <br />
           2nd step: This is a guide on how to use the feature. Click the arrow <br />
           last step: This is a guide on how to use the feature. Click the arrow <br />

@@ -48,7 +48,7 @@ function IndexPopup() {
     <>
       <div className="w-80 h-full flex flex-col justify-center items-center bg-light-bg dark:bg-dark-bg">
         <header className="w-full flex mb-2 justify-between items-center ">
-          <h1 className="text-lg font-bold  my-1 text-light-text dark:text-dark-text text-center px-2">
+          <h1 className="text-lg font-bold font-sans my-1 text-light-text dark:text-dark-text text-center px-2">
             CTV
           </h1>
           <DarkModeToggle />
