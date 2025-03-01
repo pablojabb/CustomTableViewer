@@ -34,7 +34,7 @@ function IndexPopup() {
   return (
    <>
     <div className=" w-64 h-full flex-col justify-center items-center">
-      
+      <h1 className="text-xl font-bold mb-4">Custom Table Viewer</h1>
       <div className="w-f flex-col justify-center items-center"> 
         <button className="p-4 rounded-lg  bg-gray-400" onClick={handleClick}>
         Open Table Page
