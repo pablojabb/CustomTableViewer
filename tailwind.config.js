@@ -11,7 +11,7 @@ module.exports = {
           "m-btn": "#b8daff",
           "m-btn-hover": "#a0c8f0",
           "m-btn-active": "#8eb8e0",
-          "s-btn": "#f5f5f5",
+          "s-btn": "#eeeeee",
           "s-btn-hover": "#e0e0e0",
           "s-btn-active": "#d0d0d0",
           "content-bg": "#cce5ff",
