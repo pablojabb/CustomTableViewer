@@ -36,11 +36,14 @@ const extractTableData = async () => {
 };
 
 // Run on page load
-window.onload = extractTableData;
+// window.onload = extractTableData;
 
 // Listen for messages from the popup
-chrome.runtime.onMessage.addListener((message) => {
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "extract_table") {
-    extractTableData();
+    extractTableData().then(() => {
+      sendResponse({ status: "Table extracted" }) // Send response back
+    })
+    return true // Important: Keeps the message channel open for async response
   }
-});
+})
