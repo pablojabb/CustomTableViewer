@@ -38,8 +38,8 @@ const DarkModeToggle = () => {
       <div className="flex items-center justify-center w-6 h-6 mx-2 ">
         {/* Moon Icon (Dark Mode) */}
         <svg
-          className={`absolute stroke-sky-800 w-6 h-6 transition-opacity duration-300 ${
-            darkMode ? "opacity-100" : "opacity-0"
+          className={`absolute stroke-sky-800 w-6 h-6 transition-opacity  ${
+            darkMode ? "opacity-0" : "opacity-100"
           }`}
           height="100"
           viewBox="0 0 100 100"
@@ -58,7 +58,7 @@ const DarkModeToggle = () => {
         {/* Sun Icon (Light Mode) */}
         <svg
           className={`absolute stroke-yellow-500 w-7 h-7 ${
-            darkMode ? "opacity-0" : "opacity-100"
+            darkMode ? "opacity-100" : "opacity-0"
           }`}
           height="100"
           viewBox="0 0 100 100"
