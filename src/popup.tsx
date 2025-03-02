@@ -2,6 +2,7 @@ import "index.css"
 
 import { useState } from "react"
 
+import AboutAccordion from "~AboutAccordion"
 import ReadMoreAccordion from "~ReadMoreAccordion"
 
 import DarkModeToggle from "./DarkModeToggle "
@@ -10,8 +11,6 @@ function IndexPopup() {
   const [status, setStatus] = useState("No table data extracted")
 
   const handleClick = async () => {
-    if (status === "Table data ready in new page") return
-    handleExtractTable()
     // Send a message to the background script to open a new tab
     chrome.runtime.sendMessage({ action: "openNewTab" }, (response) => {
       if (chrome.runtime.lastError) {
@@ -26,64 +25,95 @@ function IndexPopup() {
   }
 
   const handleExtractTable = async () => {
-    // Send a message to the content script to extract table data
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      if (tabs.length === 0) return
+    setStatus("Extracting...")
+    setTimeout(() => {
+      // Send a message to the content script to extract table data
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        if (tabs.length === 0) return
 
-      chrome.tabs.sendMessage(
-        tabs[0].id,
-        { action: "extract_table" },
-        (response) => {
-          if (chrome.runtime.lastError) {
-            console.error(
-              "[Popup] Error sending message to content script:",
-              chrome.runtime.lastError
-            )
-          } else {
-            console.log(
-              "[Popup] Triggered table extraction, response:",
-              response
-            )
-            setStatus("Table data ready in new page")
+        chrome.tabs.sendMessage(
+          tabs[0].id,
+          { action: "extract_table" },
+          (response) => {
+            if (chrome.runtime.lastError) {
+              console.error(
+                "[Popup] Error sending message to content script:",
+                chrome.runtime.lastError
+              )
+            } else {
+              console.log(
+                "[Popup] Triggered table extraction, response:",
+                response
+              )
+
+              // Check if the response contains the expected message
+              if (response?.status === "Table extracted") {
+                setStatus("Table data ready in new page")
+              }
+            }
           }
-        }
-      )
-    })
+        )
+      })
+    }, 500)
   }
 
   return (
     <>
       <div className="w-80 h-full flex flex-col justify-center items-center bg-light-bg dark:bg-dark-bg">
-        <header className="w-full flex mb-2 justify-between items-center ">
-          <h1 className="text-lg font-bold font-sans my-1 text-light-text dark:text-dark-text text-center px-2">
+        <header className="w-full flex mb-4 justify-between items-center ">
+          <h1 className="text-lg font-bold font-sans my-1 text-light-important-text dark:text-dark-text text-center px-2">
             CTV
           </h1>
           <DarkModeToggle />
         </header>
-        <ReadMoreAccordion />
-        <div className="w-[80%] mt-3  ">
-          <h1 className="text-lg font-semibold text-left text-light-important-text dark:text-dark-important-text ">
-            Status: <span className="font-normal text-base ">{status}</span>
+        <AboutAccordion
+          title="What is CTV?"
+          content={[
+            "Custom Table Viewer is designed for the EVSU Student Portal to help visualize schedules in a clear and organized manner."
+          ]}
+        />
+        <ReadMoreAccordion
+          title="How to use?"
+          content={[
+            "Step 1: Navigate to the Pre-registration or Subjects Enrolled page.",
+            " ",
+            "Step 2: Extract table data by clicking the 'Extract Table Data' button.",
+            " ",
+            "Final Step: Click the 'Open Table Page' button to open a new tab with the Custom Table.",
+            " ",
+          ]}
+        />
+        <div className="w-[90%] mt-7 pl-2 ">
+          <h1 className="text-lg  font-semibold text-left text-light-important-text dark:text-dark-important-text mb-1">
+            Status: <span className="font-normal text-sm ml-1 ">{status}</span>
           </h1>
         </div>
-        <div className="w-[80%] flex justify-between items-center">
+        <div className="w-[90%] flex justify-center gap-4 items-center">
           <button
-            className="px-1.5 py-3 text-sm hover:brightness-90 darK:hover:brightness-115 transition-colors rounded-md my-2 font-semibold bg-light-m-btn dark:bg-dark-m-btn text-light-important-text dark:text-light-important-text"
+            className="px-2 py-3 text-sm font-semibold rounded-md my-2 transition-colors 
+               bg-light-s-btn dark:bg-dark-s-btn 
+               hover:bg-light-s-btn-hover dark:hover:bg-dark-s-btn-hover 
+               active:bg-light-s-btn-active dark:active:bg-dark-s-btn-active
+               text-light-important-text dark:text-dark-important-text"
             onClick={handleExtractTable}>
             Extract Table Data
           </button>
-
           <button
-            className="px-1.5 py-3 dark:hover:brightness-120 hover:brightness-90 transition-colors text-sm rounded-md my-2 font-semibold bg-light-s-btn dark:bg-dark-s-btn text-light-important-text dark:text-dark-important-text"
+            className="px-2 py-3 text-sm font-semibold rounded-md my-2 transition-colors 
+               bg-light-m-btn dark:bg-dark-m-btn 
+               hover:bg-light-m-btn-hover dark:hover:bg-dark-m-btn-hover 
+               active:bg-light-m-btn-active dark:active:bg-dark-m-btn-active
+               text-light-content-text dark:text-dark-content-text"
             onClick={handleClick}>
             Open Table Page
           </button>
         </div>
-        <footer className="w-full flex justify-center items-center mt-4 mb-2">
+
+        <footer className="w-full flex justify-center items-center mt-6 py-2 border-t-[1px] border-light-content-text dark:border-light-m-btn inset-shadow-md rounded-md inset-shadow-indigo-400/50">
           <h1 className="text-xs font-sans font-medium mb-1 mt-2 text-center px-2 text-light-important-text dark:text-dark-important-text">
             Made with <span className="inline-block animate-pulse">❤️‍🔥</span> by{" "}
             <a
-              className="font-semibold hover:underline underline-offset-4"
+              className="font-semibold underline underline-offset-4"
               href="https://github.com/pablojabb"
               target="_blank"
               rel="noopener noreferrer">
