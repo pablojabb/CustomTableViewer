@@ -79,7 +79,7 @@ function IndexPopup() {
             " ",
             "Step 2: Extract table data by clicking the 'Extract Table Data' button.",
             " ",
-            "Final Step: Click the 'Open Table Page' button to open a new tab with the Custom Table.",
+            "Last Step: Click the 'Open Table Page' button to open a new tab with the Custom Table.",
             " ",
           ]}
         />
