@@ -54,7 +54,9 @@ const TablePage = () => {
 
   return (
     <div className="p-4">
-      <h1 className="text-xl font-bold mb-4 text-center">Extracted Table Data</h1>
+      <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-4 text-center">
+        Extracted Table Data
+      </h1>
       {tableData.length === 0 ? (
         <p className="text-red-500">No table data found.</p>
       ) : (
