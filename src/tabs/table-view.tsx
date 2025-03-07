@@ -95,7 +95,7 @@ const TablePage = () => {
     </div>
     //Todo: Table component
     //Todo: Summary component
-   
+    //Todo: find data tot table method
     
   )
 }
