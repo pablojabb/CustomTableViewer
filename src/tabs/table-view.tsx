@@ -98,6 +98,7 @@ const TablePage = () => {
     //Todo: find data tot table method
     //Todo: Clean up
     //Todo: Experiment more
+    //Todo: Clean up data function
     
   )
 }
