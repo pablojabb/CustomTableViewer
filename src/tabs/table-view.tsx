@@ -96,6 +96,8 @@ const TablePage = () => {
     //Todo: Table component
     //Todo: Summary component
     //Todo: find data tot table method
+    //Todo: Clean up
+    //Todo: Experiment more
     
   )
 }
