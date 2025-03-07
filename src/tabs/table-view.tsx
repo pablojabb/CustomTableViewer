@@ -94,6 +94,8 @@ const TablePage = () => {
       </div>
     </div>
     //Todo: Table component
+    //Todo: Summary component
+   
     
   )
 }
