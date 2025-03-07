@@ -85,7 +85,7 @@ const TablePage = () => {
           </tbody>
         </table>
       )}
-      <div className="mt-4">
+      <div className="mt-4 flex justify-center items-center">
         <button
           className="px-4 py-2 bg-red-500 text-white rounded"
           onClick={handleCloseTab}>
