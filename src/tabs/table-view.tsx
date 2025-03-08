@@ -1,54 +1,12 @@
-import { useEffect, useState } from "react"
-
-import { Storage } from "@plasmohq/storage"
-
+import { useTableData } from "./hook/useTableData"
+import Table from "./components/Table"
 import "../index.css"
 
 const TablePage = () => {
-  const [tableData, setTableData] = useState([])
-  const storage = new Storage()
-
-  useEffect(() => {
-    console.log("[New Tab] Loading table data from storage...")
-
-    const fetchData = async () => {
-      const data = await storage.get("tableData")
-
-      if (!data || data.length === 0) {
-        console.warn("[New Tab] No table data found in storage.")
-        return
-      }
-
-      console.log("[New Tab] Retrieved table data:", data)
-
-      // Merge "Sec" and "Subjcode" into "Sec-Subjcode"
-      const filteredData = data.map((row) => ({
-        Days: row["Days"] || "",
-        "Sec-Subjcode": `${row["Sec."] || ""}-${row["Subjcode"] || ""}`.trim(), // Merge with hyphen
-        Time: row["Time"] || ""
-      }))
-
-      setTableData(filteredData)
-    }
-
-    fetchData()
-
-    // Cleanup storage when the tab is closed
-    const handleTabClose = async () => {
-      console.log("[New Tab] Clearing storage before tab closes.")
-      await storage.remove("tableData")
-    }
-
-    window.addEventListener("beforeunload", handleTabClose)
-
-    return () => {
-      window.removeEventListener("beforeunload", handleTabClose)
-    }
-  }, [])
+  const { tableData, clearStorage } = useTableData()
 
   const handleCloseTab = async () => {
-    await storage.remove("tableData")
-    console.log("[New Tab] Storage cleared.")
+    await clearStorage()
     window.close()
   }
 
@@ -57,49 +15,13 @@ const TablePage = () => {
       <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-4 text-center">
         Extracted Table Data
       </h1>
-      {tableData.length === 0 ? (
-        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-red-500 text-center">
-          No table data found.
-        </p>
-      ) : (
-        <table className="w-full border-collapse border border-gray-300">
-          <thead>
-            <tr>
-              {["Days", "Sec-Subjcode", "Time"].map((key) => (
-                <th key={key} className="border p-2">
-                  {key}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {tableData.map((row, index) => (
-              <tr key={index}>
-                {["Days", "Sec-Subjcode", "Time"].map((key) => (
-                  <td key={key} className="border p-2">
-                    {row[key]}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+      <Table tableData={tableData} />
       <div className="mt-4 flex justify-center items-center">
-        <button
-          className="px-4 py-2 bg-red-500 text-white rounded"
-          onClick={handleCloseTab}>
-          Close Tab
-        </button>
-      </div>
+      <button className="px-4 py-2 bg-red-500 text-white rounded" onClick={handleCloseTab}>
+        Close Tab
+      </button>
     </div>
-    //Todo: Table component
-    //Todo: Summary component
-    //Todo: find data tot table method
-    //Todo: Clean up
-    //Todo: Experiment more
-    //Todo: Clean up data function
-    
+    </div>
   )
 }
 
