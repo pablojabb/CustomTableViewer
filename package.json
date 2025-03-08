@@ -10,6 +10,9 @@
     "package": "plasmo package"
   },
   "dependencies": {
+    "@fullcalendar/core": "^6.1.15",
+    "@fullcalendar/react": "^6.1.15",
+    "@fullcalendar/timegrid": "^6.1.15",
     "@plasmohq/messaging": "^0.7.1",
     "@plasmohq/storage": "^1.15.0",
     "plasmo": "0.90.3",
