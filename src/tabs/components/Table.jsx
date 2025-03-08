@@ -12,7 +12,7 @@ const Table = ({ tableData }) => {
 
   return (
     <>
-      <table className="w-full border-collapse border border-gray-900">
+      {/* <table className="w-full border-collapse border border-gray-900">
         <thead>
           <tr>
             {["Days", "Sec-Subjcode", "Time"].map((key) => (
@@ -33,7 +33,7 @@ const Table = ({ tableData }) => {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
 
       <FullCalendar
         plugins={[timeGridPlugin]}
@@ -42,10 +42,13 @@ const Table = ({ tableData }) => {
         allDaySlot={false}
         slotMaxTime={"21:00:00"}
         expandRows={true}
-        slotMinTime={"07:30:00"}
+        slotMinTime={"07:00:00"}
         contentHeight={600}
-        dayHeaderFormat={{ weekday: 'long' }}
+        dayHeaderFormat={{ weekday: "long" }}
         headerToolbar={false}
+        aspectRatio={1}
+        eventColor="#3feb56"
+       
       />
     </>
   )
