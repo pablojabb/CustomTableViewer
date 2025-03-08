@@ -1,16 +1,17 @@
-import FullCalendar from '@fullcalendar/react'
-import timeGridPlugin from '@fullcalendar/timegrid'
+import FullCalendar from "@fullcalendar/react"
+import timeGridPlugin from "@fullcalendar/timegrid"
 
 const Table = ({ tableData }) => {
-    if (tableData.length === 0) {
-      return (
-        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-red-500 text-center">
-          No table data found.
-        </p>
-      )
-    }
-  
+  if (tableData.length === 0) {
     return (
+      <p className="text-sm sm:text-base md:text-lg lg:text-xl text-red-500 text-center">
+        No table data found.
+      </p>
+    )
+  }
+
+  return (
+    <>
       <table className="w-full border-collapse border border-gray-300">
         <thead>
           <tr>
@@ -34,10 +35,9 @@ const Table = ({ tableData }) => {
         </tbody>
       </table>
 
+      <FullCalendar plugins={[timeGridPlugin]} initialView="timeGridWeek"  />
+    </>
+  )
+}
 
-
-    )
-  }
-  
-  export default Table
-  
+export default Table
