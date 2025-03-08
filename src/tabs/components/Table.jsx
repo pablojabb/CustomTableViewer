@@ -1,3 +1,6 @@
+import FullCalendar from '@fullcalendar/react'
+import timeGridPlugin from '@fullcalendar/timegrid'
+
 const Table = ({ tableData }) => {
     if (tableData.length === 0) {
       return (
@@ -30,6 +33,9 @@ const Table = ({ tableData }) => {
           ))}
         </tbody>
       </table>
+
+
+
     )
   }
   
