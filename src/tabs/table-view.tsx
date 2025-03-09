@@ -3,12 +3,14 @@ import Table from "./components/Table"
 import "../index.css"
 
 const TablePage = () => {
+  
   const { tableData, clearStorage } = useTableData()
 
   const handleCloseTab = async () => {
     await clearStorage()
     window.close()
   }
+  console.log(tableData)
 
   return (
     <div className="p-4">
