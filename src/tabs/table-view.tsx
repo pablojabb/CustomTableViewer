@@ -13,6 +13,7 @@ const TablePage = () => {
   console.log(tableData)
 
   //TODO: Add sched conflict color
+  //TODO: Redesign and add theming 
 
   return (
     <div className="p-4">
