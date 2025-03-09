@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+
 import { Storage } from "@plasmohq/storage"
 
 const storage = new Storage()
@@ -7,25 +8,43 @@ export const useTableData = () => {
   const [tableData, setTableData] = useState([])
 
   useEffect(() => {
-    console.log("[New Tab] Loading table data from storage...")
+    // console.log("[New Tab] Loading table data from storage...")
 
     const fetchData = async () => {
       const data = await storage.get("tableData")
 
       if (!data || data.length === 0) {
-        console.warn("[New Tab] No table data found in storage.")
+        // console.warn("[New Tab] No table data found in storage.")
         return
       }
 
-      console.log("[New Tab] Retrieved table data:", data)
+      // console.log("[New Tab] Retrieved table data:", data)
 
-      // Merge "Sec" and "Subjcode" into "Sec-Subjcode"
-      const filteredData = data.map((row) => ({
-        Days: row["Days"] || "",
-        "Sec-Subjcode": `${row["Sec."] || ""}-${row["Subjcode"] || ""}`.trim(),
-        Time: row["Time"] || ""
-      }))
+      let prevSecSubjcode = "" // Store previous "Sec-Subjcode"
 
+      const filteredData = data
+        .filter((row) => row["Days"]) // Skip rows where "Days" is empty or falsy
+        .map((row) => {
+          let secSubjcode =
+            `${row["Sec."] || ""}-${row["Subjcode"] || ""}`.trim()
+
+          // If both "Sec." and "Subjcode" are empty, use the previous value
+          if (secSubjcode === "-") {
+            secSubjcode = prevSecSubjcode
+          } else {
+            prevSecSubjcode = secSubjcode // Update previous Sec-Subjcode
+          }
+
+          
+
+          return {
+            Days: row["Days"],
+            "Sec-Subjcode": secSubjcode,
+            Time: row["Time"] || ""
+          }
+        })
+
+        // console.log(typeof(filteredData))
       setTableData(filteredData)
     }
 
@@ -33,7 +52,7 @@ export const useTableData = () => {
 
     // Cleanup storage when the tab is closed
     const handleTabClose = async () => {
-      console.log("[New Tab] Clearing storage before tab closes.")
+      // console.log("[New Tab] Clearing storage before tab closes.")
       await storage.remove("tableData")
     }
 
@@ -46,7 +65,7 @@ export const useTableData = () => {
 
   const clearStorage = async () => {
     await storage.remove("tableData")
-    console.log("[New Tab] Storage cleared.")
+    // console.log("[New Tab] Storage cleared.")
   }
 
   return { tableData, clearStorage }
