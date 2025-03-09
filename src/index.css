@@ -9,31 +9,31 @@ html{
 }
 
 .rildiv {
-    padding: 0 10rem !important;
+    padding: 0 10rem ;
   }
 
   @media (max-width: 1024px) {
     .rildiv {
-      padding: 0 5rem !important;
+      padding: 0 5rem ;
     }
   }
 
   @media (max-width: 768px) {
     .rildiv {
-      padding: 0 2rem !important;
+      padding: 0 2rem ;
     }
   }
 
   @media (max-width: 480px) {
     .rildiv {
-      padding: 0 1rem !important;
+      padding: 0 1rem ;
     }
   }
 
 .fc-event-time{
-text-align: center !important;
+text-align: center ;
 }
 
 .fc-event-title{
-    text-align: center !important;
+    text-align: center ;
 }
