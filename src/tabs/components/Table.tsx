@@ -34,6 +34,8 @@ const Table = ({ tableData }) => {
           headerToolbar={false}
           eventColor="#3feb56"
           events={events}
+          eventBackgroundColor="red"  // an option!
+         
         />
        
       </div>
