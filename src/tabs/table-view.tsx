@@ -15,6 +15,8 @@ const TablePage = () => {
   //TODO: Add sched conflict color
   //TODO: Redesign and add theming 
   //TODO: Fix time and date inaccuracies
+  //TODO: Add a way to add custom data for testing purposes
+  
 
   return (
     <div className="p-4">
