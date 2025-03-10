@@ -44,7 +44,7 @@ text-align: center ;
 }
 
 .fc .fc-timegrid-slot-label {
-  vertical-align: middle;
+  vertical-align: right;
   position: relative;
   top: -11px;
   border-top:none ;
