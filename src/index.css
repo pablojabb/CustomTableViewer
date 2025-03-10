@@ -54,3 +54,6 @@ text-align: center ;
   text-align: left;
 }
 
+.fc .fc-timegrid-slot-minor {
+  border-top-style: none;
+}
