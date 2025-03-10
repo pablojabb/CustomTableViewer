@@ -14,26 +14,27 @@ const Table = ({ tableData }) => {
   //   )
   // }
 
-  const events = useEvents(tableData);
+  // const events = useEvents(tableData);
   // console.log(events)
 
-  // const events = [
-  //   {
-  //     title: "Meeting",
-  //     start: "2025-03-10T10:00:00",
-  //     extendedProps: {
-  //       status: "urgent"
-  //     }
-  //   },
-  //   {
-  //     title: "Lunch",
-  //     start: "2025-03-11T12:00:00",
-  //     end: "2025-03-11T01:30:00",
-  //     extendedProps: {
-  //       status: "normal"
-  //     }
-  //   }
-  // ]
+  const events = [
+    {
+      title: "Meeting",
+      start: "2025-03-10T10:00:00",
+      end: "2025-03-10T11:30:00",
+      extendedProps: {
+        status: "urgent"
+      }
+    },
+    {
+      title: "Lunch",
+      start: "2025-03-11T12:00:00",
+      end: "2025-03-11T01:30:00",
+      extendedProps: {
+        status: "normal"
+      }
+    }
+  ]
 
   return (
     <>
