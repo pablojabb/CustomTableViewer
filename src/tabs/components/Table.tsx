@@ -38,9 +38,6 @@ const Table = ({ tableData }) => {
 
   return (
     <>
-    <div className="">
-      <div className="h-full "> summary comp</div>
-    </div>
       <div className="rildiv">
         <FullCalendar
           plugins={[timeGridPlugin]}
