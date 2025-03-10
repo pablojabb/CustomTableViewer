@@ -9,7 +9,7 @@ html{
 }
 
 .rildiv {
-    padding: 0 10rem ;
+    padding: 0 20rem ;
   }
 
   @media (max-width: 1024px) {
@@ -37,3 +37,20 @@ text-align: center ;
 .fc-event-title{
     text-align: center ;
 }
+
+.fc-timegrid-event-harness > .fc-timegrid-event {
+  inset: 0px;
+  position: absolute;
+}
+
+.fc .fc-timegrid-slot-label {
+  vertical-align: middle;
+  position: relative;
+  top: -11px;
+  border-top:none ;
+}
+
+.fc-direction-ltr .fc-timegrid-slot-label-frame {
+  text-align: left;
+}
+
