@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --fc-today-bg-color: #fff;
+}
+
+
 html{
     margin: 0;
     padding: 0;
