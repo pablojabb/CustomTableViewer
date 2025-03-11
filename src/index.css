@@ -6,6 +6,10 @@
   --fc-today-bg-color: #fff;
 }
 
+.dark :root {
+  --fc-today-bg-color: #121212; /* Dark mode background */
+}
+
 
 html{
     margin: 0;
