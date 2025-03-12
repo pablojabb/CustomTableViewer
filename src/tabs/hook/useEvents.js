@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-cconst dayMapping = {
+const dayMapping = {
   // Single-letter abbreviations
   M: ["Monday"],
   T: ["Tuesday"],
@@ -20,15 +20,24 @@ cconst dayMapping = {
   SAT: ["Saturday"],
   SUN: ["Sunday"],
 
-  // Two-day combinations
+  // Two-day combinations (no slash)
   MW: ["Monday", "Wednesday"],
   MF: ["Monday", "Friday"],
   WF: ["Wednesday", "Friday"],
-  "T/TH": ["Tuesday", "Thursday"],
+  TTH: ["Tuesday", "Thursday"],
   TT: ["Tuesday", "Thursday"], // Sometimes used for Tue/Thu
   TW: ["Tuesday", "Wednesday"],
   THF: ["Thursday", "Friday"],
-  SS: ["Saturday", "Sunday"] // Sometimes used for weekends
+  SS: ["Saturday", "Sunday"], // Sometimes used for weekends
+
+  // Two-day combinations with slashes
+  "M/W": ["Monday", "Wednesday"],
+  "M/F": ["Monday", "Friday"],
+  "W/F": ["Wednesday", "Friday"],
+  "T/TH": ["Tuesday", "Thursday"],
+  "T/W": ["Tuesday", "Wednesday"],
+  "TH/F": ["Thursday", "Friday"],
+  "S/SU": ["Saturday", "Sunday"]
 };
 
 
