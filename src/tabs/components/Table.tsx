@@ -4,15 +4,15 @@ import timeGridPlugin from "@fullcalendar/timegrid"
 import useEvents from "../hook/useEvents"
 
 const Table = ({ tableData }) => {
-  // if (tableData.length === 0) {
-  //   return (
-  //     <div className="flex justify-center items-center mt-[40vh]">
-  //       <p className="text-sm sm:text-base md:text-lg lg:text-2xl text-center">
-  //         No table data found.
-  //       </p>
-  //     </div>
-  //   )
-  // }
+  if (tableData.length === 0) {
+    return (
+      <div className="flex justify-center items-center mt-[40vh]">
+        <p className="text-sm sm:text-base md:text-lg lg:text-2xl text-center">
+          No table data found.
+        </p>
+      </div>
+    )
+  }
 
   const events = useEvents(tableData);
   // console.log(events)
