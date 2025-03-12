@@ -44,8 +44,8 @@ const Table = ({ tableData }) => {
           initialView="timeGridWeek"
           eventShortHeight={15}
           allDaySlot={false}
-          slotMaxTime="21:00:00"
-          slotMinTime="07:00:00"
+          // slotMaxTime="21:00:00"
+          // slotMinTime="07:00:00"
           expandRows={true}
           contentHeight={600}
           dayHeaderFormat={{ weekday: "short" }}
