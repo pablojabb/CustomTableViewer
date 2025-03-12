@@ -1,17 +1,36 @@
 import { useMemo } from "react";
 
-const dayMapping = {
+cconst dayMapping = {
+  // Single-letter abbreviations
   M: ["Monday"],
   T: ["Tuesday"],
   W: ["Wednesday"],
   TH: ["Thursday"],
-  THUR: ["Thursday"],
   F: ["Friday"],
+  S: ["Saturday"],
+  SU: ["Sunday"],
+
+  // Short-form abbreviations
+  MON: ["Monday"],
+  TU: ["Tuesday"],
+  WED: ["Wednesday"],
+  THU: ["Thursday"],
+  THUR: ["Thursday"],
+  FRI: ["Friday"],
   SAT: ["Saturday"],
   SUN: ["Sunday"],
+
+  // Two-day combinations
   MW: ["Monday", "Wednesday"],
+  MF: ["Monday", "Friday"],
+  WF: ["Wednesday", "Friday"],
   "T/TH": ["Tuesday", "Thursday"],
+  TT: ["Tuesday", "Thursday"], // Sometimes used for Tue/Thu
+  TW: ["Tuesday", "Wednesday"],
+  THF: ["Thursday", "Friday"],
+  SS: ["Saturday", "Sunday"] // Sometimes used for weekends
 };
+
 
 const parseTime = (timeString) => {
   const [start, end] = timeString.split("-");
