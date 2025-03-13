@@ -14,14 +14,18 @@ const Table = ({ tableData }) => {
     )
   }
 
-  const scheduleObject = {
-    Days: "MW",
-    Subject: "Math",
-    Time: "10:00 AM-11:30 AM"
-  };
+  
+
+  const testSchedule = [
+    { Days: "MW", "Sec-Subjcode": "CS101", Time: "9:00 AM-10:30 AM" },
+    { Days: "TTH", "Sec-Subjcode": "MATH202", Time: "1:00 PM-2:30 PM" },
+    { Days: "F", "Sec-Subjcode": "PHYS303", Time: "10:00 AM-11:00 AM" },
+    { Days: "S/SU", "Sec-Subjcode": "ART404", Time: "3:00 AM-5:00 PM" },
+  ];
+  
 
   // const events = useEvents(tableData);
-  const events = useEvents(scheduleObject);
+  const events = useEvents(testSchedule);
   // console.log(events)
 
   // const events = [
@@ -57,7 +61,7 @@ const Table = ({ tableData }) => {
           contentHeight={600}
           dayHeaderFormat={{ weekday: "short" }}
           headerToolbar={false}
-          // events={events}
+          events={events}
           eventDidMount={(info) => {
             if (info.event.extendedProps.status === "urgent") {
               info.el.style.backgroundColor = "red"
