@@ -14,7 +14,7 @@ const Table = ({ tableData }) => {
     )
   }
 
-  const events = useEvents(tableData);
+  // const events = useEvents(tableData);
   // console.log(events)
 
   // const events = [
@@ -50,7 +50,7 @@ const Table = ({ tableData }) => {
           contentHeight={600}
           dayHeaderFormat={{ weekday: "short" }}
           headerToolbar={false}
-          events={events}
+          // events={events}
           eventDidMount={(info) => {
             if (info.event.extendedProps.status === "urgent") {
               info.el.style.backgroundColor = "red"
