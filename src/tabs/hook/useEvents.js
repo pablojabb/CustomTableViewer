@@ -1,17 +1,45 @@
 import { useMemo } from "react";
 
 const dayMapping = {
-  M: ["Monday"], T: ["Tuesday"], W: ["Wednesday"], TH: ["Thursday"],
-  F: ["Friday"], S: ["Saturday"], SU: ["Sunday"],
-  MON: ["Monday"], TU: ["Tuesday"], WED: ["Wednesday"], THU: ["Thursday"], THUR: ["Thursday"],
-  FRI: ["Friday"], SAT: ["Saturday"], SUN: ["Sunday"],
-  MW: ["Monday", "Wednesday"], MF: ["Monday", "Friday"], WF: ["Wednesday", "Friday"],
-  TTH: ["Tuesday", "Thursday"], TT: ["Tuesday", "Thursday"], TW: ["Tuesday", "Wednesday"],
-  THF: ["Thursday", "Friday"], SS: ["Saturday", "Sunday"],
-  "M/W": ["Monday", "Wednesday"], "M/F": ["Monday", "Friday"], "W/F": ["Wednesday", "Friday"],
-  "T/TH": ["Tuesday", "Thursday"], "T/W": ["Tuesday", "Wednesday"], "TH/F": ["Thursday", "Friday"],
+  // Single-letter abbreviations
+  M: ["Monday"],
+  T: ["Tuesday"],
+  W: ["Wednesday"],
+  TH: ["Thursday"],
+  F: ["Friday"],
+  S: ["Saturday"],
+  SU: ["Sunday"],
+
+  // Short-form abbreviations
+  MON: ["Monday"],
+  TU: ["Tuesday"],
+  WED: ["Wednesday"],
+  THU: ["Thursday"],
+  THUR: ["Thursday"],
+  FRI: ["Friday"],
+  SAT: ["Saturday"],
+  SUN: ["Sunday"],
+
+  // Two-day combinations (no slash)
+  MW: ["Monday", "Wednesday"],
+  MF: ["Monday", "Friday"],
+  WF: ["Wednesday", "Friday"],
+  TTH: ["Tuesday", "Thursday"],
+  TT: ["Tuesday", "Thursday"], // Sometimes used for Tue/Thu
+  TW: ["Tuesday", "Wednesday"],
+  THF: ["Thursday", "Friday"],
+  SS: ["Saturday", "Sunday"], // Sometimes used for weekends
+
+  // Two-day combinations with slashes
+  "M/W": ["Monday", "Wednesday"],
+  "M/F": ["Monday", "Friday"],
+  "W/F": ["Wednesday", "Friday"],
+  "T/TH": ["Tuesday", "Thursday"],
+  "T/W": ["Tuesday", "Wednesday"],
+  "TH/F": ["Thursday", "Friday"],
   "S/SU": ["Saturday", "Sunday"]
 };
+
 
 const parseTime = (timeString) => {
   const [start, end] = timeString.split("-");
@@ -54,39 +82,34 @@ const getTimeZoneOffset = () => {
   return offset < 0 ? `+${hours}:${minutes}` : `-${hours}:${minutes}`;
 };
 
-const useEvents = () => {
+const useEvents = (scheduleData) => {
   return useMemo(() => {
-    // Ask user for input
-    const userInput = window.prompt("Enter schedule (e.g., 'MW|Math|10:00 AM-11:30 AM'):");
-    if (!userInput) return [];
+    if (!Array.isArray(scheduleData)) return [];
 
-    // Parse input format: "MW|Math|10:00 AM-11:30 AM"
-    const [Days, title, Time] = userInput.split("|");
-    if (!Days || !title || !Time) {
-      alert("Invalid input format! Use 'Days|Title|StartTime-EndTime'");
-      return [];
-    }
+    return scheduleData.flatMap(({ Days, "Sec-Subjcode": title, Time }) => {
+      if (!Days || !title || !Time) return [];
 
-    const days = dayMapping[Days] || [];
-    const [startTime, endTime] = parseTime(Time);
+      const days = dayMapping[Days] || [];
+      const [startTime, endTime] = parseTime(Time);
 
-    return days.map((day) => {
-      const eventDate = getNextWeekdayDate(day);
-      if (!eventDate) return null;
+      return days.map((day) => {
+        const eventDate = getNextWeekdayDate(day);
+        if (!eventDate) return null;
 
-      const startDate = new Date(eventDate);
-      startDate.setHours(startTime.hour, startTime.minute, 0, 0);
+        const startDate = new Date(eventDate);
+        startDate.setHours(startTime.hour, startTime.minute, 0, 0);
 
-      const endDate = new Date(eventDate);
-      endDate.setHours(endTime.hour, endTime.minute, 0, 0);
+        const endDate = new Date(eventDate);
+        endDate.setHours(endTime.hour, endTime.minute, 0, 0);
 
-      return {
-        title,
-        start: formatToISO(startDate),
-        end: formatToISO(endDate),
-      };
-    }).filter(Boolean);
-  }, []);
+        return {
+          title,
+          start: formatToISO(startDate),
+          end: formatToISO(endDate),
+        };
+      }).filter(Boolean);
+    });
+  }, [scheduleData]);
 };
 
 export default useEvents;
