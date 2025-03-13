@@ -14,7 +14,14 @@ const Table = ({ tableData }) => {
     )
   }
 
+  const scheduleObject = {
+    Days: "MW",
+    Subject: "Math",
+    Time: "10:00 AM-11:30 AM"
+  };
+
   // const events = useEvents(tableData);
+  const events = useEvents(scheduleObject);
   // console.log(events)
 
   // const events = [
