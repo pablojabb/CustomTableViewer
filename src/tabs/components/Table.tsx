@@ -24,8 +24,8 @@ const Table = ({ tableData }) => {
   ];
   
 
-  // const events = useEvents(tableData);
-  const events = useEvents(testSchedule);
+  const events = useEvents(tableData);
+  // const events = useEvents(testSchedule);
   // console.log(events)
 
   // const events = [
