@@ -1,53 +1,28 @@
 import { useMemo } from "react";
 
 const dayMapping = {
-  // Single-letter abbreviations
-  M: ["Monday"],
-  T: ["Tuesday"],
-  W: ["Wednesday"],
-  TH: ["Thursday"],
-  F: ["Friday"],
-  S: ["Saturday"],
-  SU: ["Sunday"],
+  M: ["Monday"], T: ["Tuesday"], W: ["Wednesday"], TH: ["Thursday"],
+  F: ["Friday"], S: ["Saturday"], SU: ["Sunday"],
 
-  // Short-form abbreviations
-  MON: ["Monday"],
-  TU: ["Tuesday"],
-  WED: ["Wednesday"],
-  THU: ["Thursday"],
-  THUR: ["Thursday"],
-  FRI: ["Friday"],
-  SAT: ["Saturday"],
-  SUN: ["Sunday"],
+  MON: ["Monday"], TU: ["Tuesday"], WED: ["Wednesday"], THU: ["Thursday"],
+  THUR: ["Thursday"], FRI: ["Friday"], SAT: ["Saturday"], SUN: ["Sunday"],
 
-  // Two-day combinations (no slash)
-  MW: ["Monday", "Wednesday"],
-  MF: ["Monday", "Friday"],
-  WF: ["Wednesday", "Friday"],
-  TTH: ["Tuesday", "Thursday"],
-  TT: ["Tuesday", "Thursday"], // Sometimes used for Tue/Thu
-  TW: ["Tuesday", "Wednesday"],
-  THF: ["Thursday", "Friday"],
-  SS: ["Saturday", "Sunday"], // Sometimes used for weekends
+  MW: ["Monday", "Wednesday"], MF: ["Monday", "Friday"], WF: ["Wednesday", "Friday"],
+  TTH: ["Tuesday", "Thursday"], TT: ["Tuesday", "Thursday"], TW: ["Tuesday", "Wednesday"],
+  THF: ["Thursday", "Friday"], SS: ["Saturday", "Sunday"],
 
-  // Two-day combinations with slashes
-  "M/W": ["Monday", "Wednesday"],
-  "M/F": ["Monday", "Friday"],
-  "W/F": ["Wednesday", "Friday"],
-  "T/TH": ["Tuesday", "Thursday"],
-  "T/W": ["Tuesday", "Wednesday"],
-  "TH/F": ["Thursday", "Friday"],
+  "M/W": ["Monday", "Wednesday"], "M/F": ["Monday", "Friday"], "W/F": ["Wednesday", "Friday"],
+  "T/TH": ["Tuesday", "Thursday"], "T/W": ["Tuesday", "Wednesday"], "TH/F": ["Thursday", "Friday"],
   "S/SU": ["Saturday", "Sunday"]
 };
 
-
 const parseTime = (timeString) => {
-  const [start, end] = timeString.split("-");
+  const [start, end] = timeString.split("-").map(str => str.trim());
 
   const convertTime = (time) => {
     let [hour, minute] = time.replace(" PM", "").replace(" AM", "").split(":");
-    hour = parseInt(hour);
-    minute = parseInt(minute) || 0;
+    hour = parseInt(hour, 10);
+    minute = parseInt(minute, 10) || 0;
 
     if (time.includes("PM") && hour !== 12) hour += 12;
     if (time.includes("AM") && hour === 12) hour = 0;
@@ -61,25 +36,20 @@ const parseTime = (timeString) => {
 const getNextWeekdayDate = (weekday) => {
   const today = new Date();
   const currentDay = today.getDay();
-  const targetDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].indexOf(weekday);
+  const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const targetDay = weekDays.indexOf(weekday);
 
   if (targetDay === -1) return null;
 
-  const daysToAdd = targetDay >= currentDay ? targetDay - currentDay : 7 - (currentDay - targetDay);
+  let daysToAdd = (targetDay - currentDay + 7) % 7 || 7;  // Ensures future dates
+
   const eventDate = new Date(today);
   eventDate.setDate(today.getDate() + daysToAdd);
   return eventDate;
 };
 
 const formatToISO = (date) => {
-  return date.toISOString().slice(0, 19) + getTimeZoneOffset();
-};
-
-const getTimeZoneOffset = () => {
-  const offset = new Date().getTimezoneOffset();
-  const hours = String(Math.abs(offset) / 60).padStart(2, "0");
-  const minutes = String(Math.abs(offset) % 60).padStart(2, "0");
-  return offset < 0 ? `+${hours}:${minutes}` : `-${hours}:${minutes}`;
+  return new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString();
 };
 
 const useEvents = (scheduleData) => {
@@ -89,7 +59,8 @@ const useEvents = (scheduleData) => {
     return scheduleData.flatMap(({ Days, "Sec-Subjcode": title, Time }) => {
       if (!Days || !title || !Time) return [];
 
-      const days = dayMapping[Days] || [];
+      const normalizedDays = Days.toUpperCase().trim();
+      const days = dayMapping[normalizedDays] || [];
       const [startTime, endTime] = parseTime(Time);
 
       return days.map((day) => {
