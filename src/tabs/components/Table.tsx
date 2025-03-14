@@ -66,7 +66,7 @@ const Table = ({ tableData }) => {
           headerToolbar={false}
           events={events}
           eventDidMount={(info) => {
-            if (info.event.extendedProps.status === "urgent") {
+            if (info.event.extendedProps.status === "conflict") {
               info.el.style.backgroundColor = "red"
             } else if (info.event.extendedProps.status === "normal") {
               info.el.style.backgroundColor = "green"
