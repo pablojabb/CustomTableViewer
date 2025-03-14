@@ -25,30 +25,10 @@ const Table = ({ tableData }) => {
     { Days: "S/SU", "Sec-Subjcode": "ART404", Time: "3:00 PM-5:00 PM" },
   ];
   
-
-  // const events = useEvents(tableData);
+  
   const events = useScheduleEvents(tableData);
-  // const events = useEvents(testSchedule);
   console.log(events)
 
-  // const events = [
-  //   {
-  //     title: "Meeting",
-  //     start: "2025-03-15T14:00:00",
-  //     end: "2025-03-15T17:30:00",
-  //     extendedProps: {
-  //       status: "urgent"
-  //     }
-  //   },
-  //   {
-  //     title: "Lunch",
-  //     start: "2025-03-14T12:00:00",
-  //     end: "2025-03-14T14:30:00",
-  //     extendedProps: {
-  //       status: "normal"
-  //     }
-  //   }
-  // ]
 
   return (
     <>
