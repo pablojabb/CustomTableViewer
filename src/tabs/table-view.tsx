@@ -12,7 +12,7 @@ const TablePage = () => {
   }
   console.log(tableData)
 
-  //TODO: Add sched conflict color
+
   //TODO: Redesign and add theming 
   //! Urgent: Fix time and date bugs
   //TODO: Add a way to add custom data for testing purposes
