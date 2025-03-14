@@ -3,11 +3,14 @@ import { useMemo } from "react";
 const dayMap = {
   "M": 1, "T": 2, "W": 3, "TH": 4, "F": 5, "S": 6, "SU": 0,
   "MON": 1, "TU": 2, "WED": 3, "THU": 4, "THUR": 4, "FRI": 5, "SAT": 6, "SUN": 0,
+  "THUR":4, "TUE": 2, "THURS": 4, "THURSDAY": 4,
+  "MONDAY": 1, "TUESDAY": 2, "WEDNESDAY": 3, "THURSDAY": 4, "FRIDAY": 5, "SATURDAY": 6, "SUNDAY": 0,
   "MW": [1, 3], "MF": [1, 5], "WF": [3, 5], "TTH": [2, 4], "TT": [2, 4], "TW": [2, 3], "THF": [4, 5], "SS": [6, 0],
   "M/W": [1, 3], "M/F": [1, 5], "W/F": [3, 5], "T/TH": [2, 4], "T/W": [2, 3], "TH/F": [4, 5], "S/SU": [6, 0]
 };
 
 const parseTime = (timeStr) => {
+  
   const [time, meridian] = timeStr.split(/(AM|PM)/);
   let [hours, minutes] = time.split(":").map(Number);
 

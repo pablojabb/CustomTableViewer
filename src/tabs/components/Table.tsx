@@ -1,7 +1,5 @@
 import FullCalendar from "@fullcalendar/react"
 import timeGridPlugin from "@fullcalendar/timegrid"
-
-import useEvents from "../hook/useEvents"
 import useScheduleEvents from './../hook/useScheduleEvents';
 
 
@@ -24,7 +22,6 @@ const Table = ({ tableData }) => {
     { Days: "WED", "Sec-Subjcode": "PHYS303", Time: "10:00 AM-11:00 AM" },
     { Days: "S/SU", "Sec-Subjcode": "ART404", Time: "3:00 PM-5:00 PM" },
   ];
-  
   
   const events = useScheduleEvents(tableData);
   console.log(events)
