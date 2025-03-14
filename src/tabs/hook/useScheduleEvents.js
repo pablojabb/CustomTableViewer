@@ -10,6 +10,12 @@ const dayMap = {
 const parseTime = (timeStr) => {
   const [time, meridian] = timeStr.split(/(AM|PM)/);
   let [hours, minutes] = time.split(":").map(Number);
+
+  // If no AM/PM is provided and time is within school hours, assume PM
+  if (!meridian && hours >= 1 && hours <= 6) {
+    hours += 12;
+  }
+
   if (meridian === "PM" && hours !== 12) hours += 12;
   if (meridian === "AM" && hours === 12) hours = 0;
   return { hours, minutes };
