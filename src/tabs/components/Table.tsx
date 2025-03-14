@@ -4,15 +4,15 @@ import timeGridPlugin from "@fullcalendar/timegrid"
 import useEvents from "../hook/useEvents"
 
 const Table = ({ tableData }) => {
-  if (tableData.length === 0) {
-    return (
-      <div className="flex justify-center items-center mt-[40vh]">
-        <p className="text-sm sm:text-base md:text-lg lg:text-2xl text-center">
-          No table data found.
-        </p>
-      </div>
-    )
-  }
+  // if (tableData.length === 0) {
+  //   return (
+  //     <div className="flex justify-center items-center mt-[40vh]">
+  //       <p className="text-sm sm:text-base md:text-lg lg:text-2xl text-center">
+  //         No table data found.
+  //       </p>
+  //     </div>
+  //   )
+  // }
 
   
 
@@ -31,16 +31,16 @@ const Table = ({ tableData }) => {
   const events = [
     {
       title: "Meeting",
-      start: "2025-03-10T10:00:00",
-      end: "2025-03-10T11:30:00",
+      start: "2025-03-15T14:00:00",
+      end: "2025-03-15T17:30:00",
       extendedProps: {
         status: "urgent"
       }
     },
     {
       title: "Lunch",
-      start: "2025-03-11T12:00:00",
-      end: "2025-03-11T01:30:00",
+      start: "2025-03-14T12:00:00",
+      end: "2025-03-14T14:30:00",
       extendedProps: {
         status: "normal"
       }
