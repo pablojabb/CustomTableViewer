@@ -15,7 +15,6 @@ const TablePage = () => {
 
   //TODO: Redesign and add theming 
   //! Urgent: Fix time and date bugs
-  //TODO: Add a way to add custom data for testing purposes
   //TODO: Finalize Summary Component
 
 
