@@ -44,7 +44,7 @@ const getDateForWeekDay = (day) => {
 
 const useScheduleEvents = (schedule) => {
   return useMemo(() => {
-    return schedule.flatMap(({ Days, "Sec-Subjcode": title, Time }) => {
+    const events = schedule.flatMap(({ Days, "Sec-Subjcode": title, Time }) => {
       const [startTime, endTime] = Time.split("-").map(parseTime);
       const dayAbbreviations = Days.split("/");
 
@@ -57,6 +57,20 @@ const useScheduleEvents = (schedule) => {
         }));
       });
     });
+
+    // Check for conflicts
+    const conflicts = [];
+    events.forEach((event, index) => {
+      events.forEach((otherEvent, otherIndex) => {
+        if (index !== otherIndex && event.start < otherEvent.end && event.end > otherEvent.start) {
+          event.extendedProps.status = "conflict";
+          otherEvent.extendedProps.status = "conflict";
+          conflicts.push(event.title, otherEvent.title);
+        }
+      });
+    });
+
+    return { events, conflictCount: new Set(conflicts).size, conflictSubjects: [...new Set(conflicts)] };
   }, [schedule]);
 };
 
