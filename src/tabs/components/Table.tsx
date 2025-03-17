@@ -4,6 +4,7 @@ import timeGridPlugin from "@fullcalendar/timegrid"
 import DarkModeToggle from "~DarkModeToggle "
 
 import useScheduleEvents from "./../hook/useScheduleEvents"
+import SummaryCard from "./SummaryCard"
 
 const Table = ({ tableData }) => {
   // if (tableData.length === 0) {
@@ -49,6 +50,10 @@ const Table = ({ tableData }) => {
             }
           }}
         />
+        <SummaryCard
+          vacantDays={vacantDays}
+          conflictCount={conflictCount}
+          conflictSubjects={conflictSubjects}/>
       </div>
     </>
   )

@@ -12,12 +12,6 @@ const TablePage = () => {
   }
   console.log(tableData)
 
-
-  //TODO: Redesign and add theming 
-  //! Urgent: Fix time and date bugs
-  //TODO: Finalize Summary Component
-
-
   return (
     <div className="p-4">
       <Table tableData={tableData} />
