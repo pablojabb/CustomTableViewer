@@ -1,7 +1,9 @@
 import FullCalendar from "@fullcalendar/react"
 import timeGridPlugin from "@fullcalendar/timegrid"
-import useScheduleEvents from './../hook/useScheduleEvents';
 
+import DarkModeToggle from "~DarkModeToggle "
+
+import useScheduleEvents from "./../hook/useScheduleEvents"
 
 const Table = ({ tableData }) => {
   // if (tableData.length === 0) {
@@ -14,15 +16,20 @@ const Table = ({ tableData }) => {
   //   )
   // }
 
-  
-  const { events, conflictCount, conflictSubjects } = useScheduleEvents(tableData);
-  // const events = useScheduleEvents(tableData);
-  console.log(events)
-
+  const { vacantDays, events, conflictCount, conflictSubjects } =
+    useScheduleEvents(tableData)
+  console.log("Vacant days: ", vacantDays)
 
   return (
     <>
       <div className="rildiv">
+        <div className="flex justify-between items-center mt-2">
+          {/* <h2 className="font-sans text-lg"></h2> */}
+          <DarkModeToggle />
+          <button className="px-4 py-2 bg-green-500 text-white rounded">
+            Download as PNG
+          </button>
+        </div>
         <FullCalendar
           plugins={[timeGridPlugin]}
           initialView="timeGridWeek"
