@@ -15,8 +15,8 @@ const Table = ({ tableData }) => {
   // }
 
   
-  
-  const events = useScheduleEvents(tableData);
+  const { events, conflictCount, conflictSubjects } = useScheduleEvents(tableData);
+  // const events = useScheduleEvents(tableData);
   console.log(events)
 
 
