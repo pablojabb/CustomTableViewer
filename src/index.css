@@ -3,18 +3,37 @@
 @tailwind utilities;
 
 :root {
-  --fc-today-bg-color: #fff;
+  --fc-today-bg-color: inherit;
+  --fc-small-font-size: 0.9em;
+  --fc-border-color: #121212;
+  --fc-page-bg-color: transparent;
+  --fc-event-text-color: #121212;
 }
 
-.dark :root {
-  --fc-today-bg-color: #121212; /* Dark mode background */
+:root.dark {
+  --fc-today-bg-color: inherit;
+  --fc-border-color: #e1e2e1;
+  --fc-event-text-color: #0a2f59;
+  
+}
+
+:root.dark a {
+  color: #e1e2e1;
+}
+
+a {
+  color: #121212;
+}
+
+.dark .fc .fc-timegrid-slot-label-cushion {
+  color: #e1e2e1;
 }
 
 
-html{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .rildiv {
@@ -52,13 +71,12 @@ html{
   }
 }
 
-
-.fc-event-time{
-text-align: center ;
+.fc-event-time {
+  text-align: center;
 }
 
-.fc-event-title{
-    text-align: center ;
+.fc-event-title {
+  text-align: center;
 }
 
 .fc-timegrid-event-harness > .fc-timegrid-event {
@@ -70,7 +88,7 @@ text-align: center ;
   vertical-align: right;
   position: relative;
   top: -11px;
-  border-top:none ;
+  border-top: none;
 }
 
 .fc-direction-ltr .fc-timegrid-slot-label-frame {
