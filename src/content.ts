@@ -17,7 +17,7 @@ const extractTableData = async () => {
     return;
   }
 
-  const table = tables.length > 1 ? tables[1] : tables[0]; // Get second table if available
+  const table = tables.length > 1 ? tables[1] : tables[0]; 
   console.log(`[Content Script] Found ${tables.length} table(s), extracting from the ${tables.length > 1 ? "second" : "first"} one.`);
 
   const headers = Array.from(table.querySelectorAll("th")).map((th) => th.innerText.trim());
@@ -30,20 +30,17 @@ const extractTableData = async () => {
 
   console.log("[Content Script] Extracted Table Data:", rows);
 
-  // Store the data in Plasmo Storage
+  
   await storage.set("tableData", rows);
   console.log("[Content Script] Table data saved in storage.");
 };
 
-// Run on page load
-// window.onload = extractTableData;
 
-// Listen for messages from the popup
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "extract_table") {
     extractTableData().then(() => {
-      sendResponse({ status: "Table extracted" }) // Send response back
+      sendResponse({ status: "Table extracted" })
     })
-    return true // Important: Keeps the message channel open for async response
+    return true 
   }
 })
