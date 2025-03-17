@@ -15,13 +15,6 @@ const Table = ({ tableData }) => {
   // }
 
   
-
-  const testSchedule = [
-    { Days: "M", "Sec-Subjcode": "CS101", Time: "9:00 AM-10:30 AM" },
-    { Days: "T", "Sec-Subjcode": "MATH202", Time: "3:00 PM-5:00 PM" },
-    { Days: "WED", "Sec-Subjcode": "PHYS303", Time: "10:00 AM-11:00 AM" },
-    { Days: "S/SU", "Sec-Subjcode": "ART404", Time: "3:00 PM-5:00 PM" },
-  ];
   
   const events = useScheduleEvents(tableData);
   console.log(events)

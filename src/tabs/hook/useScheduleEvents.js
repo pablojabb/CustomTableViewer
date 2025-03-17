@@ -94,10 +94,20 @@ const useScheduleEvents = (schedule) => {
       });
     });
 
-    return { events };
+    // Check for conflicts
+    const conflicts = [];
+    events.forEach((event, index) => {
+      events.forEach((otherEvent, otherIndex) => {
+        if (index !== otherIndex && event.start < otherEvent.end && event.end > otherEvent.start) {
+          event.extendedProps.status = "conflict";
+          otherEvent.extendedProps.status = "conflict";
+          conflicts.push(event.title, otherEvent.title);
+        }
+      });
+    });
+
+    return { events, conflictCount: new Set(conflicts).size, conflictSubjects: [...new Set(conflicts)] };
   }, [schedule]);
 };
-
-
 
 export default useScheduleEvents;
