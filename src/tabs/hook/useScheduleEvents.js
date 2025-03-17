@@ -10,19 +10,40 @@ const dayMap = {
 };
 
 const parseTime = (timeStr) => {
-  
-  const [time, meridian] = timeStr.split(/(AM|PM)/);
-  let [hours, minutes] = time.split(":").map(Number);
+  // Replace any invalid characters (; or multiple colons) with a single colon
+  timeStr = timeStr.replace(/[^0-9APM]/gi, ":").replace(/:+/g, ":");
 
-  // If no AM/PM is provided and time is within school hours, assume PM
-  if (!meridian && hours >= 1 && hours <= 6) {
-    hours += 12;
+  // Ensure time has at least one colon (if missing, add `:00`)
+  if (!timeStr.includes(":")) {
+    timeStr = timeStr.replace(/(\d+)/, "$1:00");
   }
 
-  if (meridian === "PM" && hours !== 12) hours += 12;
-  if (meridian === "AM" && hours === 12) hours = 0;
+  // Extract time and meridian (AM/PM)
+  const match = timeStr.match(/(\d{1,2}):?(\d{0,2})\s*(AM|PM)?/i);
+  if (!match) return null; // Invalid format
+
+  let [_, hours, minutes, meridian] = match;
+  hours = parseInt(hours, 10);
+  minutes = minutes ? parseInt(minutes, 10) : 0; // Default to 00 minutes if missing
+
+  // Auto-correct missing AM/PM assumptions
+  if (!meridian) {
+    if (hours >= 1 && hours <= 6) {
+      meridian = "PM"; // Assume PM for 1-6 (afternoon classes)
+    } else if (hours >= 7 && hours <= 11) {
+      meridian = "AM"; // Assume AM for 7-11
+    } else if (hours === 12) {
+      meridian = "PM"; // Assume PM for 12 (common mistake)
+    }
+  }
+
+  // Convert to 24-hour format
+  if (meridian?.toUpperCase() === "PM" && hours !== 12) hours += 12;
+  if (meridian?.toUpperCase() === "AM" && hours === 12) hours = 0;
+
   return { hours, minutes };
 };
+
 
 const getDateForWeekDay = (day) => {
   const today = new Date();
@@ -30,15 +51,15 @@ const getDateForWeekDay = (day) => {
   const targetDays = Array.isArray(dayMap[day]) ? dayMap[day] : [dayMap[day]];
 
   return targetDays.map(targetDay => {
-    let diff;
-    if (currentDay === 0) { // Sunday
-      diff = targetDay - 7;
-    } else if (currentDay === 1) { // Monday
-      diff = targetDay > currentDay ? targetDay - currentDay : 7 - (currentDay - targetDay);
-    } else { // Any other day
-      diff = targetDay <= currentDay ? targetDay - currentDay : 7 - (currentDay - targetDay);
+    let diff = targetDay - currentDay;
+
+    // If targetDay is today, keep it at 0
+    // If targetDay was yesterday, set diff to -1
+    // Otherwise, find the nearest past or future occurrence
+    if (diff < -1) {
+      diff += 7; // Move it to next week
     }
-    
+
     const resultDate = new Date(today);
     resultDate.setDate(today.getDate() + diff);
     return resultDate.toISOString().split("T")[0];
