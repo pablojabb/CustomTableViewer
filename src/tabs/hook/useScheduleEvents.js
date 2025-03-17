@@ -8,46 +8,42 @@ const dayMap = {
   "MW": [1, 3], "MF": [1, 5], "WF": [3, 5], "TTH": [2, 4], "TF": [2, 5], "TW": [2, 3], "THF": [4, 5], "SS": [6, 0],
   "M/W": [1, 3], "M/F": [1, 5], "W/F": [3, 5], "T/TH": [2, 4], "T/W": [2, 3], "TH/F": [4, 5], "S/SU": [6, 0]
 };
-const parseTime = (timeStr) => {
-  // Replace invalid characters (; or multiple colons) with a single colon
+
+
+const parseTime = (timeStr, assumePM = false) => {
+  // Fix typos (replace ; and multiple colons with a single colon)
   timeStr = timeStr.replace(/[^0-9APM]/gi, ":").replace(/:+/g, ":");
 
-  // Ensure time has at least one colon (if missing, add `:00`)
+  // Ensure at least HH:MM format (if only HH, add :00)
   if (!timeStr.includes(":")) {
     timeStr = timeStr.replace(/(\d+)/, "$1:00");
   }
 
-  // Extract time and meridian (AM/PM)
+  // Extract hours, minutes, and AM/PM if provided
   const match = timeStr.match(/(\d{1,2}):?(\d{0,2})\s*(AM|PM)?/i);
-  if (!match) return null; // Invalid format
+  if (!match) return null; // Invalid input
 
   let [_, hours, minutes, meridian] = match;
   hours = parseInt(hours, 10);
-  minutes = minutes ? parseInt(minutes, 10) : 0; // Default to 00 minutes if missing
+  minutes = minutes ? parseInt(minutes, 10) : 0; // Default to :00 if missing
 
-  // Auto-correct missing AM/PM assumptions
+  // Auto-assign AM/PM if missing
   if (!meridian) {
-    if (hours >= 4 && hours <= 6) {
-      meridian = "PM"; // Assume PM for 4, 5, 6 (including 4:15, 4:30, 4:45)
-    } else if (hours >= 1 && hours <= 3) {
-      meridian = "PM"; // Assume PM for 1, 2, 3 (afternoon classes)
+    if (assumePM || (hours >= 4 && hours <= 6)) {
+      meridian = "PM"; // Assume PM for 4-6
     } else if (hours >= 7 && hours <= 11) {
-      meridian = "AM"; // Assume AM for 7-11 (morning classes)
-    } else if (hours === 12) {
-      meridian = "PM"; // Assume PM for 12
+      meridian = "AM"; // Assume AM for morning classes
+    } else {
+      meridian = "PM"; // Default to PM
     }
   }
 
   // Convert to 24-hour format
-  if (meridian?.toUpperCase() === "PM" && hours !== 12) hours += 12;
-  if (meridian?.toUpperCase() === "AM" && hours === 12) hours = 0;
+  if (meridian.toUpperCase() === "PM" && hours !== 12) hours += 12;
+  if (meridian.toUpperCase() === "AM" && hours === 12) hours = 0;
 
   return { hours, minutes };
 };
-
-
-
-
 
 const getDateForWeekDay = (day) => {
   const today = new Date();
