@@ -29,10 +29,10 @@ const parseTime = (timeStr, assumePM = false) => {
 
   // Auto-assign AM/PM if missing
   if (!meridian) {
-    if (assumePM || (hours >= 4 && hours <= 6)) {
+    if (hours >= 4 && hours <= 6) {
       meridian = "PM"; // Assume PM for 4-6
     } else if (hours >= 7 && hours <= 11) {
-      meridian = "AM"; // Assume AM for morning classes
+      meridian = "AM"; // Assume AM for 7-11
     } else {
       meridian = "PM"; // Default to PM
     }
@@ -42,7 +42,7 @@ const parseTime = (timeStr, assumePM = false) => {
   if (meridian.toUpperCase() === "PM" && hours !== 12) hours += 12;
   if (meridian.toUpperCase() === "AM" && hours === 12) hours = 0;
 
-  return { hours, minutes };
+  return { hours, minutes, meridian };
 };
 
 const getDateForWeekDay = (day) => {
@@ -69,7 +69,15 @@ const getDateForWeekDay = (day) => {
 const useScheduleEvents = (schedule) => {
   return useMemo(() => {
     const events = schedule.flatMap(({ Days, "Sec-Subjcode": title, Time }) => {
-      const [startTime, endTime] = Time.split("-").map(parseTime);
+      const [startTimeStr, endTimeStr] = Time.split("-");
+
+      // Parse start time
+      const startTime = parseTime(startTimeStr);
+
+      // Determine if end time should be AM or PM based on start time
+      const assumeEndPM = startTime.hours >= 12 || (startTime.meridian === "PM" && startTime.hours !== 12);
+      const endTime = parseTime(endTimeStr, assumeEndPM);
+
       const dayAbbreviations = Days.split("/");
 
       return dayAbbreviations.flatMap((day) => {
@@ -82,20 +90,9 @@ const useScheduleEvents = (schedule) => {
       });
     });
 
-    // Check for conflicts
-    const conflicts = [];
-    events.forEach((event, index) => {
-      events.forEach((otherEvent, otherIndex) => {
-        if (index !== otherIndex && event.start < otherEvent.end && event.end > otherEvent.start) {
-          event.extendedProps.status = "conflict";
-          otherEvent.extendedProps.status = "conflict";
-          conflicts.push(event.title, otherEvent.title);
-        }
-      });
-    });
-
-    return { events, conflictCount: new Set(conflicts).size, conflictSubjects: [...new Set(conflicts)] };
+    return { events };
   }, [schedule]);
 };
+
 
 export default useScheduleEvents;
