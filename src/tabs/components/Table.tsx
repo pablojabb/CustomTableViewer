@@ -5,17 +5,18 @@ import DarkModeToggle from "~DarkModeToggle "
 
 import useScheduleEvents from "./../hook/useScheduleEvents"
 import SummaryCard from "./SummaryCard"
+import KofiButton from "./KofiButton"
 
 const Table = ({ tableData }) => {
-  // if (tableData.length === 0) {
-  //   return (
-  //     <div className="flex justify-center items-center mt-[40vh]">
-  //       <p className="text-sm sm:text-base md:text-lg lg:text-2xl text-center">
-  //         No table data found.
-  //       </p>
-  //     </div>
-  //   )
-  // }
+  if (tableData.length === 0) {
+    return (
+      <div className="flex justify-center items-center mt-[40vh] mb-6">
+        <p className="text-sm sm:text-base md:text-lg lg:text-2xl text-center">
+          No table data found.
+        </p>
+      </div>
+    )
+  }
 
   const { vacantDays, events, conflictCount, conflictSubjects } =
     useScheduleEvents(tableData)
@@ -28,9 +29,7 @@ const Table = ({ tableData }) => {
       <div className="rildiv">
         <div className="flex justify-between items-center mb-2">
           <DarkModeToggle />
-          <button className="px-4 py-2 bg-green-500 text-white rounded">
-            Download as PNG
-          </button>
+          <KofiButton />
         </div>
         <FullCalendar
           plugins={[timeGridPlugin]}
@@ -46,16 +45,17 @@ const Table = ({ tableData }) => {
           events={events}
           eventDidMount={(info) => {
             if (info.event.extendedProps.status === "conflict") {
-              info.el.style.backgroundColor = "red"
+              info.el.style.backgroundColor = "oklch(0.704 0.191 22.216)"
             } else if (info.event.extendedProps.status === "normal") {
-              info.el.style.backgroundColor = "green"
+              info.el.style.backgroundColor = "#a0c8f0"
             }
           }}
         />
         <SummaryCard
           vacantDays={vacantDays}
           conflictCount={conflictCount}
-          conflictSubjects={conflictSubjects}/>
+          conflictSubjects={conflictSubjects}
+        />
       </div>
     </>
   )
