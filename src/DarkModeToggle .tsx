@@ -5,7 +5,7 @@ import "index.css"
 const storage = new Storage();
 
 const DarkModeToggle = () => {
-  const [darkMode, setDarkMode] = useState<boolean | null>(null); // Initially null to prevent flicker
+  const [darkMode, setDarkMode] = useState<boolean | null>(null); 
 
   useEffect(() => {
     const loadTheme = async () => {
@@ -22,7 +22,7 @@ const DarkModeToggle = () => {
   }, []);
 
   useEffect(() => {
-    if (darkMode === null) return; // Prevent initial flickering
+    if (darkMode === null) return;
     document.documentElement.classList.toggle("dark", darkMode);
     storage.set("theme", darkMode ? "dark" : "light");
   }, [darkMode]);
