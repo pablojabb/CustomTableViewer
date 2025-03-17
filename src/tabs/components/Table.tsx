@@ -23,8 +23,7 @@ const Table = ({ tableData }) => {
   return (
     <>
       <div className="rildiv">
-        <div className="flex justify-between items-center mt-2">
-          {/* <h2 className="font-sans text-lg"></h2> */}
+        <div className="flex justify-between items-center mb-2">
           <DarkModeToggle />
           <button className="px-4 py-2 bg-green-500 text-white rounded">
             Download as PNG
