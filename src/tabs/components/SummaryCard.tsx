@@ -3,22 +3,26 @@ import React from "react"
 import Card from "./Card"
 
 const SummaryCard = ({ vacantDays, conflictCount, conflictSubjects }) => {
+
+    const formattedConflict = conflictCount > 0 ? conflictSubjects.join(", ") : "None";
+    const formattedVacantDays = vacantDays.length > 0 ? vacantDays.join(", ") : "None";
+
   return (
     <>
       <div className="flex flex-wrap items-center justify-center gap-4 my-8">
         <div className="flex flex-col justify-center items-center ">
-          <h1 className="text-3xl font-bold">Summary</h1>
+          <h1 className="text-3xl font-semibold text-light-important-text dark:text-dark-important-text">Summary</h1>
       
-            <div className="flex-col items-center justify-center flex-grow gap-4 my-4">
+            <div className="flex-row items-center justify-center gap-4 my-4">
             <Card
               color="text-red-500"
-              title="Number of Conflict/s"
-              value={conflictCount }
+              title="Schedule Conflict"
+              value={formattedConflict }
               icon={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width={28}
-                  height={28}
+                  width={26}
+                  height={26}
                   viewBox="0 0 24 24">
                   <path
                     fill="none"
@@ -31,14 +35,14 @@ const SummaryCard = ({ vacantDays, conflictCount, conflictSubjects }) => {
               }
             />
             <Card
-              title="Vacant Day/s"
-              value={""+vacantDays}
+              title="Vacant Day"
+              value={""+formattedVacantDays}
               color="text-green-500"
               icon={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width={28}
-                  height={28}
+                  width={26}
+                  height={26}
                   viewBox="0 0 24 24">
                   <g fill="currentColor">
                     <path d="M12.75 12.75a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0m-5.25 3a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5m.75 1.5a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0m1.5-1.5a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5m.75 1.5a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0m1.5-1.5a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5m.75 1.5a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0m1.5-1.5a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5m.75 1.5a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0m1.5-1.5a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5m-1.5-3a.75.75 0 1 1-1.5 0a.75.75 0 0 1 1.5 0m1.5.75a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5"></path>
