@@ -13,7 +13,7 @@ const SummaryCard = ({ vacantDays, conflictCount, conflictSubjects }) => {
             <Card
               color="text-red-500"
               title="Conflicts"
-              value={conflictCount}
+              value={"Number of Conflict: "+conflictCount}
               icon={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -31,8 +31,8 @@ const SummaryCard = ({ vacantDays, conflictCount, conflictSubjects }) => {
               }
             />
             <Card
-              title="Vacant Days"
-              value={vacantDays}
+              title="Vacant Day/s"
+              value={"Number of Vacant Days: "+vacantDays}
               color="text-green-500"
               icon={
                 <svg

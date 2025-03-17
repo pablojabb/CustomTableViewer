@@ -20,6 +20,8 @@ const Table = ({ tableData }) => {
   const { vacantDays, events, conflictCount, conflictSubjects } =
     useScheduleEvents(tableData)
   console.log("Vacant days: ", vacantDays)
+  console.log("Events: ", events)
+  console.log("Conflict count: ", conflictCount)
 
   return (
     <>
