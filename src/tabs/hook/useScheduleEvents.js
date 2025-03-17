@@ -10,7 +10,7 @@ const dayMap = {
 };
 
 const parseTime = (timeStr) => {
-  // Replace any invalid characters (; or multiple colons) with a single colon
+  // Replace invalid characters (;, ::) with a single colon
   timeStr = timeStr.replace(/[^0-9APM]/gi, ":").replace(/:+/g, ":");
 
   // Ensure time has at least one colon (if missing, add `:00`)
@@ -28,10 +28,12 @@ const parseTime = (timeStr) => {
 
   // Auto-correct missing AM/PM assumptions
   if (!meridian) {
-    if (hours >= 1 && hours <= 6) {
-      meridian = "PM"; // Assume PM for 1-6 (afternoon classes)
+    if (hours >= 4 && hours <= 6) {
+      meridian = "PM"; // Assume PM for 4, 5, 6 (late afternoon/evening classes)
+    } else if (hours >= 1 && hours <= 3) {
+      meridian = "PM"; // Assume PM for 1-3 (afternoon)
     } else if (hours >= 7 && hours <= 11) {
-      meridian = "AM"; // Assume AM for 7-11
+      meridian = "AM"; // Assume AM for morning classes
     } else if (hours === 12) {
       meridian = "PM"; // Assume PM for 12 (common mistake)
     }
@@ -43,6 +45,7 @@ const parseTime = (timeStr) => {
 
   return { hours, minutes };
 };
+
 
 
 const getDateForWeekDay = (day) => {
