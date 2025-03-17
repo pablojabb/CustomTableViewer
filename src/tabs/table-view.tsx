@@ -13,11 +13,15 @@ const TablePage = () => {
   console.log(tableData)
 
   return (
-    <div className="p-4">
+    <div className="p-4 dark:bg-dark-bg">
       <Table tableData={tableData} />
-      <div className="mt-4 flex justify-center items-center">
+      <div className=" flex justify-center items-center">
         <button
-          className="px-4 py-2 bg-green-500 text-white rounded"
+          className="p-2 text-base font-semibold rounded transition-colors 
+          bg-light-m-btn dark:bg-dark-m-btn 
+          hover:bg-light-m-btn-hover dark:hover:bg-dark-m-btn-hover 
+          active:bg-light-m-btn-active dark:active:bg-dark-m-btn-active
+          text-light-content-text dark:text-dark-content-text"
           onClick={handleCloseTab}>
           Close Tab
         </button>
