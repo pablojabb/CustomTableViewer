@@ -12,8 +12,8 @@ const SummaryCard = ({ vacantDays, conflictCount, conflictSubjects }) => {
             <div className="flex-col items-center justify-center flex-grow gap-4 my-4">
             <Card
               color="text-red-500"
-              title="Conflicts"
-              value={"Number of Conflict: "+conflictCount}
+              title="Number of Conflict/s"
+              value={conflictCount }
               icon={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -32,7 +32,7 @@ const SummaryCard = ({ vacantDays, conflictCount, conflictSubjects }) => {
             />
             <Card
               title="Vacant Day/s"
-              value={"Number of Vacant Days: "+vacantDays}
+              value={""+vacantDays}
               color="text-green-500"
               icon={
                 <svg
