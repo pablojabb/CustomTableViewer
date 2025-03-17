@@ -10,7 +10,7 @@ const dayMap = {
 };
 
 
-const parseTime = (timeStr, assumePM = false) => {
+const parseTime = (timeStr, forcePM = false) => {
   // Fix typos (replace ; and multiple colons with a single colon)
   timeStr = timeStr.replace(/[^0-9APM]/gi, ":").replace(/:+/g, ":");
 
@@ -38,12 +38,16 @@ const parseTime = (timeStr, assumePM = false) => {
     }
   }
 
+  // If forcePM is true, override to PM
+  if (forcePM) meridian = "PM";
+
   // Convert to 24-hour format
   if (meridian.toUpperCase() === "PM" && hours !== 12) hours += 12;
   if (meridian.toUpperCase() === "AM" && hours === 12) hours = 0;
 
   return { hours, minutes, meridian };
 };
+
 
 const getDateForWeekDay = (day) => {
   const today = new Date();
@@ -74,9 +78,9 @@ const useScheduleEvents = (schedule) => {
       // Parse start time
       const startTime = parseTime(startTimeStr);
 
-      // Determine if end time should be AM or PM based on start time
-      const assumeEndPM = startTime.hours >= 12 || (startTime.meridian === "PM" && startTime.hours !== 12);
-      const endTime = parseTime(endTimeStr, assumeEndPM);
+      // Ensure end time follows start period
+      const forceEndPM = startTime.meridian === "PM";
+      const endTime = parseTime(endTimeStr, forceEndPM);
 
       const dayAbbreviations = Days.split("/");
 
@@ -93,6 +97,7 @@ const useScheduleEvents = (schedule) => {
     return { events };
   }, [schedule]);
 };
+
 
 
 export default useScheduleEvents;
