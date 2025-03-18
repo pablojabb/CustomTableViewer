@@ -23,6 +23,9 @@ const Table = ({ tableData }) => {
   //TODO: Release Beta version
   //TODO: Plan next update (features) 
 
+  const handleDownload = async () => {
+   alert("Coming Soon😎!!")
+  }
 
   return (
     <>
@@ -35,7 +38,8 @@ const Table = ({ tableData }) => {
           bg-light-m-btn dark:bg-dark-m-btn 
           hover:bg-light-m-btn-hover dark:hover:bg-dark-m-btn-hover 
           active:bg-light-m-btn-active dark:active:bg-dark-m-btn-active
-          text-light-content-text dark:text-dark-content-text">
+          text-light-content-text dark:text-dark-content-text"
+          onClick={handleDownload}>
             Download Image
           </button>
         </div>
