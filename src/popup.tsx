@@ -4,6 +4,7 @@ import { useState } from "react"
 
 import AboutAccordion from "~AboutAccordion"
 import ReadMoreAccordion from "~ReadMoreAccordion"
+import Footer from "~tabs/Footer"
 
 import DarkModeToggle from "./DarkModeToggle "
 
@@ -80,7 +81,7 @@ function IndexPopup() {
             "Step 2: Extract table data by clicking the 'Extract Table Data' button.",
             " ",
             "Last Step: Click the 'Open Table Page' button to open a new tab with the Custom Table.",
-            " ",
+            " "
           ]}
         />
         <div className="w-[90%] mt-7 pl-2 ">
@@ -109,18 +110,7 @@ function IndexPopup() {
           </button>
         </div>
 
-        <footer className="w-full flex justify-center items-center mt-6 py-2 border-t-[1px] border-light-content-text dark:border-light-m-btn inset-shadow-md rounded-md inset-shadow-indigo-400/50">
-          <h1 className="text-xs font-sans font-medium mb-1 mt-2 text-center px-2 text-light-important-text dark:text-dark-important-text">
-            Made with <span className="inline-block animate-pulse">❤️‍🔥</span> by{" "}
-            <a
-              className="font-semibold underline underline-offset-4"
-              href="https://github.com/pablojabb"
-              target="_blank"
-              rel="noopener noreferrer">
-              @pablojabb
-            </a>
-          </h1>
-        </footer>
+        <Footer />
       </div>
     </>
   )
