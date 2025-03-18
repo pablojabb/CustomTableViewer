@@ -5,7 +5,6 @@ import DarkModeToggle from "~DarkModeToggle "
 
 import useScheduleEvents from "./../hook/useScheduleEvents"
 import SummaryCard from "./SummaryCard"
-import KofiButton from "./KofiButton"
 
 const Table = ({ tableData }) => {
   if (tableData.length === 0) {
@@ -29,7 +28,15 @@ const Table = ({ tableData }) => {
       <div className="rildiv">
         <div className="flex justify-between items-center mb-2">
           <DarkModeToggle />
-          <KofiButton />
+          <button
+            className="p-2 text-sm
+             font-semibold rounded transition-colors 
+          bg-light-m-btn dark:bg-dark-m-btn 
+          hover:bg-light-m-btn-hover dark:hover:bg-dark-m-btn-hover 
+          active:bg-light-m-btn-active dark:active:bg-dark-m-btn-active
+          text-light-content-text dark:text-dark-content-text">
+            Download Image
+          </button>
         </div>
         <FullCalendar
           plugins={[timeGridPlugin]}

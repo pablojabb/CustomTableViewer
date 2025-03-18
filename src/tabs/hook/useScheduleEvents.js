@@ -12,10 +12,9 @@ const dayMap = {
 const fullDayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 const parseTime = (timeStr, forcePM = false) => {
-  timeStr = timeStr.replace(/[^0-9APM]/gi, ":").replace(/:+/g, ":"); // Normalize formatting
-
+  timeStr = timeStr.replace(/[^0-9APM]/gi, ":").replace(/:+/g, ":"); 
   if (!timeStr.includes(":")) {
-    timeStr = timeStr.replace(/(\d+)/, "$1:00"); // Ensure HH:MM format
+    timeStr = timeStr.replace(/(\d+)/, "$1:00"); 
   }
 
   const match = timeStr.match(/(\d{1,2}):?(\d{0,2})\s*(AM|PM)?/i);
@@ -46,22 +45,23 @@ const parseTime = (timeStr, forcePM = false) => {
 const getDateForWeekDay = (day) => {
   const today = new Date();
   const currentDay = today.getDay();
+  const startOfWeek = new Date(today);
+  startOfWeek.setDate(today.getDate() - currentDay); // Set to Sunday of the current week
+
   const targetDays = Array.isArray(dayMap[day]) ? dayMap[day] : [dayMap[day]];
 
   return targetDays.map(targetDay => {
-    let diff = targetDay - currentDay;
-    if (diff < -1) diff += 7;
-
-    const resultDate = new Date(today);
-    resultDate.setDate(today.getDate() + diff);
+    const resultDate = new Date(startOfWeek);
+    resultDate.setDate(startOfWeek.getDate() + targetDay); // Ensure it's in the same week
     return resultDate.toISOString().split("T")[0];
   });
 };
 
+
 const useScheduleEvents = (schedule) => {
   return useMemo(() => {
     const usedDays = new Set();
-    const allDays = new Set([0, 1, 2, 3, 4, 5, 6]); // SU to SAT
+    const allDays = new Set([0, 1, 2, 3, 4, 5, 6]); 
 
     const events = schedule.flatMap(({ Days, "Sec-Subjcode": title, Time }) => {
       const [startTimeStr, endTimeStr] = Time.split("-");
@@ -74,7 +74,7 @@ const useScheduleEvents = (schedule) => {
 
       return dayAbbreviations.flatMap((day) => {
         const eventDays = getDateForWeekDay(day);
-        eventDays.forEach(() => usedDays.add(dayMap[day])); // Track scheduled days
+        eventDays.forEach(() => usedDays.add(dayMap[day])); 
 
         return eventDays.map(dateStr => ({
           title,
@@ -85,12 +85,11 @@ const useScheduleEvents = (schedule) => {
       });
     });
 
-    // Identify vacant days and convert to full names
+   
     const vacantDays = [...allDays]
       .filter(day => !usedDays.has(day))
       .map(day => fullDayNames[day]);
 
-    // Detect conflicts
     const conflicts = [];
     events.forEach((event, index) => {
       events.forEach((otherEvent, otherIndex) => {
