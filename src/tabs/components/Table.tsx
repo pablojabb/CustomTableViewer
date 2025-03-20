@@ -22,6 +22,7 @@ const Table = ({ tableData }) => {
 
   //TODO: Release Beta version
   //TODO: Plan next update (features) 
+  //TODO: Image feature
 
   const handleDownload = async () => {
    alert("Coming Soon😎!!")
