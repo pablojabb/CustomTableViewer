@@ -20,7 +20,7 @@ const Table = ({ tableData }) => {
   const { vacantDays, events, conflictCount, conflictSubjects } =
     useScheduleEvents(tableData)
 
-  //TODO: Release Beta version
+
   //TODO: Plan next update (features) 
   //TODO: Image feature
   //TODO: Vacant Time in Summary component 
