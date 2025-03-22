@@ -1,33 +1,37 @@
-This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with [`plasmo init`](https://www.npmjs.com/package/plasmo).
+# CTV (Custom Table Viewer)
 
-## Getting Started
+## Description
+CTV is a browser extension designed to help students instantly visualize their schedules by extracting table data from the university’s system (Pre-Registration & Schedule Pages) and transforming it into a well-structured timetable. It automatically detects conflicts, highlights overlapping time slots, and presents the schedule in a clearer format. This removes the hassle of manually checking for conflicts, allowing students to resolve issues quickly and plan their time better—without long waiting times or unnecessary stress.
 
-First, run the development server:
+## Installation & Setup
 
-```bash
-pnpm dev
-# or
-npm run dev
-```
+### Download
+[Download CTV Extension](CTV/chrome-mv3-dev/)
 
-Open your browser and load the appropriate development build. For example, if you are developing for the chrome browser, using manifest v3, use: `build/chrome-mv3-dev`.
+### Installation Guide
+1. **Download the extension files** from the link above.
+2. **Extract the ZIP file (if in .ZIP format)** to a folder on your computer.
+3. **Open Chrome and go to** `chrome://extensions/`.
+4. **Enable Developer mode** (top-right corner).
+5. **Click "Load unpacked"** and select the extracted folder.
+6. The extension should now be installed and ready to use.
 
-You can start editing the popup by modifying `popup.tsx`. It should auto-update as you make changes. To add an options page, simply add a `options.tsx` file to the root of the project, with a react component default exported. Likewise to add a content page, add a `content.ts` file to the root of the project, importing some module and do some logic, then reload the extension on your browser.
+### Video Guide
+[How To Install Unpacked Extensions In Google Chrome - Full Guide](https://youtu.be/NH5CPm9pyts?si=mrQzDJGgTOjDVLN3)
 
-For further guidance, [visit our Documentation](https://docs.plasmo.com/)
+## Usage
+1. Navigate to the **Pre-Registration** or **Subjects Enrolled** page.
+2. Click on the **Extract Table Data** button to retrieve the schedule from the webpage.
+3. Click the **Open Table Page** button to display the extracted data in a new tab with the Custom Table format.
+4. The schedule will be formatted clearly, and any conflicts will be highlighted automatically.
 
-## Making production build
+### Preview
+![CTV Preview](CTV/preview.png)
 
-Run the following:
 
-```bash
-pnpm build
-# or
-npm run build
-```
 
-This should create a production bundle for your extension, ready to be zipped and published to the stores.
+## Contributing
+If you’d like to contribute, feel free to fork the repository and submit a pull request.
 
-## Submit to the webstores
-
-The easiest way to deploy your Plasmo extension is to use the built-in [bpp](https://bpp.browser.market) GitHub action. Prior to using this action however, make sure to build your extension and upload the first version to the store to establish the basic credentials. Then, simply follow [this setup instruction](https://docs.plasmo.com/framework/workflows/submit) and you should be on your way for automated submission!
+## License
+MIT License
