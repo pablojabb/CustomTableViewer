@@ -17,7 +17,7 @@ const TablePage = () => {
       <Table tableData={tableData} />
       <div className=" flex justify-center items-center">
         <button
-          className="p-2 text-base font-semibold rounded transition-colors 
+          className="p-2 px-4 text-base font-semibold rounded transition-colors 
           bg-light-m-btn dark:bg-dark-m-btn 
           hover:bg-light-m-btn-hover dark:hover:bg-dark-m-btn-hover 
           active:bg-light-m-btn-active dark:active:bg-dark-m-btn-active
