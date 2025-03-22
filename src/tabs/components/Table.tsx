@@ -23,11 +23,7 @@ const Table = ({ tableData }) => {
 
 
   //TODO: Plan next update (features) 
-  //TODO: Image feature
 
-  // const handleDownload = async () => {
-  //   convertToPng
-  // }
 
   const [state, convertToJpeg, ref] = useToJpeg<HTMLDivElement>({
     onSuccess: data => {
@@ -53,7 +49,7 @@ const Table = ({ tableData }) => {
           active:bg-light-m-btn-active dark:active:bg-dark-m-btn-active
           text-light-content-text dark:text-dark-content-text"
           onClick={convertToJpeg}>
-            <span className="mr-1 text-lg"><FiArrowDownCircle/></span> Download as PNG
+            <span className="mr-1 text-lg"><FiArrowDownCircle/></span> Download as Jpeg
           </button>
         </div>
         <div ref={ref} className="w-auto h-auto dark:bg-dark-bg bg-light-bg">
