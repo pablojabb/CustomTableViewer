@@ -6,7 +6,7 @@ CTV is a browser extension designed to help students instantly visualize their s
 ## Installation & Setup
 
 ### Download
-[Download CTV Extension](CTV/chrome-mv3-dev/)
+[Download CTV Extension](https://github.com/pablojabb/CustomTableViewer/releases/tag/v1.0.0)
 
 ### Installation Guide
 1. **Download the extension files** from the link above.
