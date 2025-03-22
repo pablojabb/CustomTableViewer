@@ -7,6 +7,7 @@ module.exports = {
       colors: {
         light: {
           bg: "#ffffff",
+          "bg": "#ffffff",
           text: "#a7a4b1",
           "m-btn": "#b8daff",
           "m-btn-hover": "#a0c8f0",
@@ -20,6 +21,7 @@ module.exports = {
         },
         dark: {
           bg: "#121212",
+          "bg": "#121212",
           text: "#c0c0c0",
           "m-btn": "#b8daff",
           "m-btn-hover": "#a0c8f0",
