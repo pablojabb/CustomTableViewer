@@ -47,6 +47,8 @@ Encountered a problem? Let me know!
 3. Provide a descriptive title and details.
 4. Click **Submit new issue**.
 
+Your feedback helps me improve this Chrome extension. Thanks for your support!
+
 ## Contributing
 
 If you’d like to contribute, feel free to fork the repository and submit a pull request.
