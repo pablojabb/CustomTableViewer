@@ -41,9 +41,11 @@ Encountered a problem? Let me know!
 📧 **Email:** jumayaanthony@gmail.com
 
 📂 **Create an issue on this repository**
+
 1. Go to the **Issues** tab in the repository.
 2. Click **New Issue**.
 3. Click **Submit new issue**.
+4. Click **Submit new issue**.
 
 ## Contributing
 
