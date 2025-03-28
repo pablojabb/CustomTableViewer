@@ -44,7 +44,7 @@ Encountered a problem? Let me know!
 
 1. Go to the **Issues** tab in the repository.
 2. Click **New Issue**.
-3. Click **Submit new issue**.
+3. Provide a descriptive title and details.
 4. Click **Submit new issue**.
 
 ## Contributing
