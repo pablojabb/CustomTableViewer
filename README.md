@@ -28,7 +28,8 @@ CTV is a browser extension designed to help students instantly visualize their s
 ### Preview
 ![CTV Preview](CTV/preview.png)
 
-
+## Reporting Issues, Bugs, or Problems
+Encountered a problem? Let me know!
 
 ## Contributing
 If you’d like to contribute, feel free to fork the repository and submit a pull request.
