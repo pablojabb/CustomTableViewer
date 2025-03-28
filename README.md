@@ -33,9 +33,9 @@ Encountered a problem? Let me know!
 
 - 📧 **Email:** jumayaanthony@gmail.com  
 
-- 🐛 **Create an issue on this repository** 
+- 📂 **Create an issue on this repository** 
   1. Go to the **Issues** tab in the repository. 
-  
+
 ## Contributing
 If you’d like to contribute, feel free to fork the repository and submit a pull request.
 
