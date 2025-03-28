@@ -33,6 +33,8 @@ Encountered a problem? Let me know!
 
 - 📧 **Email:** jumayaanthony@gmail.com  
 
+- 🐛 **Create an issue on this repository** 
+
 ## Contributing
 If you’d like to contribute, feel free to fork the repository and submit a pull request.
 
