@@ -1,8 +1,8 @@
 {
-  "name": "custom-table-viewer",
-  "displayName": "Custom table viewer",
+  "name": "CTV | Custom Table Viewer",
+  "displayName": "CTV | Custom Table Viewer",
   "version": "0.0.1",
-  "description": "A basic Plasmo extension.",
+  "description": "Custom Table Viewer.",
   "author": "pablojabb@ghub",
   "scripts": {
     "dev": "plasmo dev",
