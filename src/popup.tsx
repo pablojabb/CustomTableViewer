@@ -12,7 +12,6 @@ function IndexPopup() {
   const [status, setStatus] = useState("No table data extracted")
 
   const handleClick = async () => {
-    // Send a message to the background script to open a new tab
     chrome.runtime.sendMessage({ action: "openNewTab" }, (response) => {
       if (chrome.runtime.lastError) {
         console.error(
@@ -28,28 +27,24 @@ function IndexPopup() {
   const handleExtractTable = async () => {
     setStatus("Extracting...")
     setTimeout(() => {
-      // Send a message to the content script to extract table data
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         if (tabs.length === 0) return
-
+  
         chrome.tabs.sendMessage(
-          tabs[0].id,
+          tabs[0].id!,
           { action: "extract_table" },
           (response) => {
             if (chrome.runtime.lastError) {
-              console.error(
-                "[Popup] Error sending message to content script:",
-                chrome.runtime.lastError
-              )
+              
+              setStatus("No table data extracted")
             } else {
-              console.log(
-                "[Popup] Triggered table extraction, response:",
-                response
-              )
-
-              // Check if the response contains the expected message
+  
               if (response?.status === "Table extracted") {
                 setStatus("Table data ready in new page")
+              } else if (response?.status === "no_tabledata") {
+                setStatus("No table extracted")
+              } else {
+                setStatus("No table data extracted")
               }
             }
           }
@@ -57,7 +52,8 @@ function IndexPopup() {
       })
     }, 500)
   }
-
+  
+  
   return (
     <>
       <div className="w-80 h-full flex flex-col justify-center items-center bg-light-bg dark:bg-dark-bg">

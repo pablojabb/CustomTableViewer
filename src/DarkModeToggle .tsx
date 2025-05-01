@@ -36,7 +36,6 @@ const DarkModeToggle = () => {
         onChange={() => setDarkMode((prev) => !prev)}
       />
       <div className="flex items-center justify-center w-6 h-6 mx-2 ">
-        {/* Moon Icon (Dark Mode) */}
         <svg
           className={`absolute stroke-sky-800 w-6 h-6 transition-opacity  ${
             darkMode ? "opacity-0" : "opacity-100"
@@ -54,8 +53,6 @@ const DarkModeToggle = () => {
             strokeWidth="8"
           />
         </svg>
-
-        {/* Sun Icon (Light Mode) */}
         <svg
           className={`absolute stroke-yellow-500 w-7 h-7 ${
             darkMode ? "opacity-100" : "opacity-0"
