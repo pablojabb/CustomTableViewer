@@ -1,5 +1,5 @@
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  console.log("[Background] Received message:", message)
+  // console.log("[Background] Received message:", message)
 
   if (message.action === "openNewTab") {
 

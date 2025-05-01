@@ -10,7 +10,6 @@ const TablePage = () => {
     await clearStorage()
     window.close()
   }
-  console.log(tableData)
 
   return (
     <div className="p-4 dark:bg-dark-bg">

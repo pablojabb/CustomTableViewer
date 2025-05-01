@@ -13,14 +13,6 @@ function IndexPopup() {
 
   const handleClick = async () => {
     chrome.runtime.sendMessage({ action: "openNewTab" }, (response) => {
-      if (chrome.runtime.lastError) {
-        console.error(
-          "[Popup] Error sending message to background:",
-          chrome.runtime.lastError
-        )
-      } else {
-        console.log("[Popup] Sent message to open new tab, response:", response)
-      }
     })
   }
 

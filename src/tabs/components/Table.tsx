@@ -14,11 +14,13 @@ const Table = ({ tableData }) => {
       const link = document.createElement("a")
       link.href = data
       link.download = "screenshot.jpg"
-      document.body.appendChild(link)
       link.click()
-      document.body.removeChild(link)
     }
   })
+
+  // Ensure `useScheduleEvents` is always called even when tableData is empty
+  const { vacantDays, events, conflictCount, conflictSubjects } =
+    useScheduleEvents(tableData)
 
   if (tableData.length === 0) {
     return (
@@ -29,11 +31,6 @@ const Table = ({ tableData }) => {
       </div>
     )
   }
-
-  const { vacantDays, events, conflictCount, conflictSubjects } =
-    useScheduleEvents(tableData)
-
-  //TODO: Plan next update (features)
 
   return (
     <>
