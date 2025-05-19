@@ -1,6 +1,6 @@
 import "index.css"
 
-import { useState } from "react"
+import { useState,useEffect } from "react"
 
 import AboutAccordion from "~AboutAccordion"
 import ReadMoreAccordion from "~ReadMoreAccordion"
@@ -12,8 +12,7 @@ function IndexPopup() {
   const [status, setStatus] = useState("No table data extracted")
 
   const handleClick = async () => {
-    chrome.runtime.sendMessage({ action: "openNewTab" }, (response) => {
-    })
+    chrome.runtime.sendMessage({ action: "openNewTab" }, (response) => {})
   }
 
   const handleExtractTable = async () => {
@@ -21,16 +20,14 @@ function IndexPopup() {
     setTimeout(() => {
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         if (tabs.length === 0) return
-  
+
         chrome.tabs.sendMessage(
           tabs[0].id!,
           { action: "extract_table" },
           (response) => {
             if (chrome.runtime.lastError) {
-              
               setStatus("No table data extracted")
             } else {
-  
               if (response?.status === "Table extracted") {
                 setStatus("Table data ready in new page")
               } else if (response?.status === "no_tabledata") {
@@ -44,8 +41,37 @@ function IndexPopup() {
       })
     }, 500)
   }
-  
-  
+
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [tableCount, setTableCount] = useState(0)
+
+  useEffect(() => {
+    chrome.tabs.query({ active: true, currentWindow: true }, ([tab]) => {
+      chrome.tabs.sendMessage(tab.id, { action: "get_table_count" }, (res) => {
+        setTableCount(res?.count || 0)
+        // console.log("Table count:", res?.count)
+      })
+    })
+  }, [])
+
+  const navigateTable = (direction: "prev" | "next") => {
+    let newIndex = currentIndex + (direction === "next" ? 1 : -1)
+    if (newIndex < 0) newIndex = 0
+    if (newIndex >= tableCount) newIndex = tableCount - 1
+
+    chrome.tabs.query({ active: true, currentWindow: true }, ([tab]) => {
+      chrome.tabs.sendMessage(
+        tab.id,
+        { action: "highlight_table", index: newIndex },
+        (res) => {
+          if (res?.status === "highlighted") {
+            setCurrentIndex(newIndex)
+          }
+        }
+      )
+    })
+  }
+
   return (
     <>
       <div className="w-80 h-full flex flex-col justify-center items-center bg-light-bg dark:bg-dark-bg">
@@ -75,6 +101,8 @@ function IndexPopup() {
         <div className="w-[90%] mt-7 pl-2 ">
           <h1 className="text-lg  font-semibold text-left text-light-important-text dark:text-dark-important-text mb-1">
             Status: <span className="font-normal text-sm ml-1 ">{status}</span>
+            <button onClick={() => navigateTable("prev")}>Prev</button>
+            <button onClick={() => navigateTable("next")}>Next</button>
           </h1>
         </div>
         <div className="w-[90%] flex justify-center gap-4 items-center">
