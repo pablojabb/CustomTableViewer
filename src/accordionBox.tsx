@@ -54,10 +54,10 @@ const ReadMoreAccordion: React.FC<ReadMoreAccordionProps> = ({
       <div
         className={cn(
           "overflow-hidden transition-[max-height] duration-500 ease-in-out motion-safe:animate-fade-in",
-          isOpen ? "max-h-96 mt-2" : "max-h-0"
+          isOpen ? "max-h-96 " : "max-h-0"
         )}
       >
-        <div className="text-sm font-sans cursor-default space-y-2">
+        <div className="text-sm font-sans cursor-default space-y-2 mt-2">
           {content.map((sentence, index) => (
             <p key={index} className="text-justify text-xs">
               {sentence}
