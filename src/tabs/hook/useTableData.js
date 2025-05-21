@@ -14,6 +14,7 @@ export const useTableData = () => {
       if (!data || data.length === 0) {
         return
       }
+      console.log("Fetched table data:", data)
 
       let prevSecSubjcode = ""
 

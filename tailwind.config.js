@@ -1,3 +1,4 @@
+import tailwindcssMotion from "tailwindcss-motion"
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   mode: "jit",
@@ -37,5 +38,5 @@ module.exports = {
     }
   },
   content: ["./**/*.tsx"],
-  plugins: []
+  plugins: [tailwindcssMotion]
 }

@@ -1,9 +1,8 @@
 import "index.css"
 
-import { useState,useEffect } from "react"
-
-import AboutAccordion from "~AboutAccordion"
-import ReadMoreAccordion from "~ReadMoreAccordion"
+import { useEffect, useState } from "react"
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi"
+import ReadMoreAccordion from "./accordion-box"
 import Footer from "~tabs/Footer"
 
 import DarkModeToggle from "./DarkModeToggle "
@@ -48,8 +47,23 @@ function IndexPopup() {
   useEffect(() => {
     chrome.tabs.query({ active: true, currentWindow: true }, ([tab]) => {
       chrome.tabs.sendMessage(tab.id, { action: "get_table_count" }, (res) => {
-        setTableCount(res?.count || 0)
-        // console.log("Table count:", res?.count)
+        const count = res?.count || 0
+        setTableCount(count)
+
+        if (count > 0) {
+          chrome.tabs.sendMessage(
+            tab.id,
+            { action: "highlight_table", index: 0 },
+            (res) => {
+              if (res?.status === "highlighted") {
+                console.log("[DEBUG] Auto-highlighted first table")
+                setCurrentIndex(0)
+              } else {
+                console.warn("[DEBUG] Failed to auto-highlight first table")
+              }
+            }
+          )
+        }
       })
     })
   }, [])
@@ -81,15 +95,11 @@ function IndexPopup() {
           </h1>
           <DarkModeToggle />
         </header>
-        <AboutAccordion
-          title="What is CTV?"
-          content={[
-            "Custom Table Viewer is designed for the EVSU Student Portal to help visualize schedules in a clear and organized manner."
-          ]}
-        />
         <ReadMoreAccordion
-          title="How to use?"
+          title="What is CTV and How to Use It?"
           content={[
+            "Custom Table Viewer is designed for the EVSU Student Portal to help visualize schedules in a clear and organized manner.",
+            " ",
             "Step 1: Navigate to the Pre-registration or Subjects Enrolled page.",
             " ",
             "Step 2: Extract table data by clicking the 'Extract Table Data' button.",
@@ -97,15 +107,36 @@ function IndexPopup() {
             "Last Step: Click the 'Open Table Page' button to open a new tab with the Custom Table.",
             " "
           ]}
+          variant="default"
         />
-        <div className="w-[90%] mt-7 pl-2 ">
-          <h1 className="text-lg  font-semibold text-left text-light-important-text dark:text-dark-important-text mb-1">
+
+        <div className="w-[90%] mt-4 pl-2 ">
+          <div className="flex justify-center gap-3 items-center mb-2">
+            <button
+              disabled={tableCount <= 1}
+              className={`text-light-important-text dark:text-dark-important-text text-lg ${
+                tableCount <= 1 ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+              onClick={() => navigateTable("prev")}>
+              <FiChevronLeft />
+            </button>
+            <h2 className="inline-flex text-base font-semibold text-left text-light-important-text dark:text-dark-important-text">
+              Table {tableCount > 0 ? currentIndex + 1 : 0} of {tableCount}
+            </h2>
+            <button
+              disabled={tableCount <= 1}
+              className={`text-light-important-text dark:text-dark-important-text text-lg ${
+                tableCount <= 1 ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+              onClick={() => navigateTable("next")}>
+              <FiChevronRight />
+            </button>
+          </div>
+          <h1 className="text-base text-center font-semibold text-light-important-text dark:text-dark-important-text mb-1">
             Status: <span className="font-normal text-sm ml-1 ">{status}</span>
-            <button onClick={() => navigateTable("prev")}>Prev</button>
-            <button onClick={() => navigateTable("next")}>Next</button>
           </h1>
         </div>
-        <div className="w-[90%] flex justify-center gap-4 items-center">
+        <div className="w-[90%] flex flex-col justify-center gap-4 items-center">
           <button
             className="px-2 py-3 text-sm font-semibold rounded-md my-2 transition-colors 
                bg-light-s-btn dark:bg-dark-s-btn 

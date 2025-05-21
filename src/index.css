@@ -5,15 +5,15 @@
 :root {
   --fc-today-bg-color: inherit;
   --fc-small-font-size: 0.9em;
-  --fc-border-color: #121212;
+  --fc-border-color: #242323;
   --fc-page-bg-color: transparent;
   --fc-event-border-color: inherit;
-  --fc-event-text-color: #121212;
+  --fc-event-text-color: #242323;
 }
 
 :root.dark {
   --fc-today-bg-color: inherit;
-  --fc-border-color: #e1e2e1;
+  --fc-border-color: #e1e2e1cf;
   --fc-event-text-color: #0a2f59;
   --fc-event-border-color: inherit;
 }
@@ -27,7 +27,7 @@
 }
 
 :root.dark a {
-  color: #e1e2e1;
+  color: #e1e2e1cf;
 }
 
 a {

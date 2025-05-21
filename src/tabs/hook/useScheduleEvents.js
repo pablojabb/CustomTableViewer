@@ -43,6 +43,7 @@ const parseTime = (timeStr, forcePM = false) => {
 };
 
 const getDateForWeekDay = (day) => {
+  day = day.toUpperCase();
   const today = new Date();
   const currentDay = today.getDay();
   const startOfWeek = new Date(today);

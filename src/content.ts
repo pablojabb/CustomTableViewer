@@ -13,7 +13,6 @@ const highlightTable = (index: number) => {
   const tables = document.querySelectorAll("table") as NodeListOf<HTMLTableElement>
   if (tables.length === 0 || index < 0 || index >= tables.length) return
 
-  // Remove border from previous
   if (previousTable) {
     previousTable.style.border = ""
   }
@@ -34,7 +33,6 @@ const extractTableData = async () => {
 
   const table = tables[currentIndex]
 
-  // Temporarily remove border during extraction
   const originalBorder = table.style.border
   table.style.border = ""
 
@@ -58,7 +56,6 @@ const extractTableData = async () => {
 
     return rows.length > 0 ? "success" : null
   } finally {
-    // Restore yellow border after extraction
     table.style.border = originalBorder
   }
 }
