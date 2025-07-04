@@ -8,7 +8,7 @@ CTV is a browser extension designed to help students instantly visualize their s
 
 ### Download
 
-[Download CTV Extension](https://github.com/pablojabb/CustomTableViewer/releases/tag/v1.0.1)
+[Download CTV Extension](https://github.com/pablojabb/CustomTableViewer/releases/tag/v1.2.0)
 
 ### Installation Guide
 
@@ -23,12 +23,6 @@ CTV is a browser extension designed to help students instantly visualize their s
 
 [How To Install Unpacked Extensions In Google Chrome - Full Guide](https://youtu.be/NH5CPm9pyts?si=mrQzDJGgTOjDVLN3)
 
-## Usage
-
-1. Navigate to the **Pre-Registration** or **Subjects Enrolled** page.
-2. Click on the **Extract Table Data** button to retrieve the schedule from the webpage.
-3. Click the **Open Table Page** button to display the extracted data in a new tab with the Custom Table format.
-4. The schedule will be formatted clearly, and any conflicts will be highlighted automatically.
 
 ### Preview
 

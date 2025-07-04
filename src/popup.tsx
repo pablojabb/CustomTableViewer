@@ -1,10 +1,11 @@
 import "index.css"
 
 import { useEffect, useState } from "react"
-import { FiChevronLeft, FiChevronRight,FiSettings } from "react-icons/fi"
-import ReadMoreAccordion from "./accordionBox"
+import { FiChevronLeft, FiChevronRight, FiSettings } from "react-icons/fi"
+
 import Footer from "~tabs/Footer"
 
+import ReadMoreAccordion from "./accordionBox"
 import DarkModeToggle from "./darkModeToggle"
 
 function IndexPopup() {
@@ -13,7 +14,6 @@ function IndexPopup() {
   const openNewtab = async () => {
     chrome.runtime.sendMessage({ action: "openNewTab" }, (response) => {})
   }
-
 
   const handleExtractTable = async () => {
     setStatus("Extracting...")
@@ -94,8 +94,7 @@ function IndexPopup() {
           <h1 className="text-lg font-bold font-sans my-1 text-light-important-text dark:text-dark-text text-center px-2">
             CTV
           </h1>
-            <DarkModeToggle />
-
+          <DarkModeToggle />
         </header>
         <ReadMoreAccordion
           title="What is CTV and How to Use It?"
@@ -104,9 +103,9 @@ function IndexPopup() {
             " ",
             "Step 1: Navigate to the Pre-registration or Subjects Enrolled page.",
             " ",
-            "Step 2: Extract table data by clicking the 'Extract Table Data' button.",
+            "Step 2: Select the table and extract its data by clicking the 'Extract Data' button.",
             " ",
-            "Last Step: Click the 'Open Table Page' button to open a new tab with the Custom Table.",
+            "Last Step: Click the 'View Timetable' button to open a new tab with the Custom Table.",
             " "
           ]}
           variant="default"
@@ -123,7 +122,7 @@ function IndexPopup() {
               <FiChevronLeft />
             </button>
             <h2 className="inline-flex text-2xl font-semibold text-left text-light-important-text dark:text-dark-important-text">
-               Table {tableCount > 0 ? currentIndex + 1 : 0}  out of {tableCount}
+              Table {tableCount > 0 ? currentIndex + 1 : 0} out of {tableCount}
             </h2>
             <button
               disabled={tableCount <= 1}
@@ -146,7 +145,7 @@ function IndexPopup() {
                active:bg-light-s-btn-active dark:active:bg-dark-s-btn-active
                text-light-important-text dark:text-dark-important-text"
             onClick={handleExtractTable}>
-            Extract  Data
+            Extract Data
           </button>
           <button
             className="px-3 py-2 text-sm font-semibold rounded-md my-1 transition-colors 
