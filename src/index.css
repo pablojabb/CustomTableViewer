@@ -41,47 +41,6 @@ a {
 }
 
 
-html {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.rildiv {
-  padding: 0 18rem;
-}
-
-@media (max-width: 1024px) {
-  .rildiv {
-    padding: 0 5rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .rildiv {
-    padding: 0 2rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .rildiv {
-    padding: 0 1rem;
-  }
-}
-
-/* Responsive for larger screens */
-@media (min-width: 1280px) {
-  .rildiv {
-    padding: 0 18rem;
-  }
-}
-
-@media (min-width: 1536px) {
-  .rildiv {
-    padding: 0 20rem;
-  }
-}
-
 .fc-event-time {
   text-align: center;
 }
@@ -108,4 +67,47 @@ html {
 
 .fc .fc-timegrid-slot-minor {
   border-top-style: none;
+}
+
+
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.rildiv {
+  padding: 0 18rem;
+}
+
+
+/* media queries */
+@media (max-width: 1024px) {
+  .rildiv {
+    padding: 0 5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .rildiv {
+    padding: 0 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .rildiv {
+    padding: 0 1rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .rildiv {
+    padding: 0 18rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .rildiv {
+    padding: 0 20rem;
+  }
 }

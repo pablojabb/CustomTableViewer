@@ -7,8 +7,8 @@ module.exports = {
     extend: {
       colors: {
         light: {
-          bg: "#ffffff",
-          "bg": "#ffffff",
+          bg: "#F2F3F4",
+          "bg": "#F2F3F4",
           text: "#a7a4b1",
           "m-btn": "#b8daff",
           "m-btn-hover": "#a0c8f0",

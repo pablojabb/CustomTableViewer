@@ -19,7 +19,7 @@ const Table = ({ tableData }) => {
   })
 
   // Ensure `useScheduleEvents` is always called even when tableData is empty
-  const { vacantDays, events, conflictCount, conflictSubjects } =
+  const { vacantDays, events, conflictGroups } =
     useScheduleEvents(tableData)
 
   if (tableData.length === 0) {
@@ -76,8 +76,7 @@ const Table = ({ tableData }) => {
 
         <SummaryCard
           vacantDays={vacantDays}
-          conflictCount={conflictCount}
-          conflictSubjects={conflictSubjects}
+          conflictGroups={conflictGroups}
         />
       </div>
     </>

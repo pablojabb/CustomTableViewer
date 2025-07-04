@@ -11,7 +11,7 @@ const Card = ({ title, value, icon, color = "text-white" }) => {
           {title}
         </span>
       </div>
-      <span className="text-2xl font-semibold text-center text-light-important-text dark:text-dark-important-text">
+      <span className="text-2xl font-normal text-center text-light-important-text dark:text-dark-important-text">
         {value}
       </span>
     </div>

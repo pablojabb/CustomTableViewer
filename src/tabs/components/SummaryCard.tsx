@@ -4,13 +4,13 @@ import Card from "./Card"
 const SummaryCard = ({ vacantDays = [], conflictGroups = [] }) => {
   const formattedVacantDays =
     vacantDays.length > 0 ? vacantDays.join(", ") : "None"
-
+  console.log("Conflict Groups:", conflictGroups)
   const formattedConflict =
     conflictGroups.length > 0
       ? conflictGroups
           .map((group) => {
             const subjects = group.subjects.map((s) => s.title).join(" & ")
-            return `Day: ${group.day}\nTime: ${group.time}\nConflicting Sub: ${subjects}`
+            return `Day: ${group.day}\nTime: ${group.time}\nConflicting Sub: \n ${subjects}`
           })
           .join("\n\n")
       : "None"
