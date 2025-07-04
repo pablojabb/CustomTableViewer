@@ -23,8 +23,14 @@ CTV is a browser extension designed to help students instantly visualize their s
 
 [How To Install Unpacked Extensions In Google Chrome - Full Guide](https://youtu.be/NH5CPm9pyts?si=mrQzDJGgTOjDVLN3)
 
+## Contributing
 
-### Preview
+## Features
+
+- 🔍 Navigate through tables one by one with **auto-scroll** and a **yellow highlighter** for focus  
+- 🖼️ **Download** the generated timetable as a **JPEG image**  
+- 🌗 Supports **Light** and **Dark** mode for better accessibility and preference
+
 
 ![CTV Preview](CTV/preview.png)
 
