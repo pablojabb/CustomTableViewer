@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+
 import { Storage } from "@plasmohq/storage"
 
 const storage = new Storage()
@@ -11,11 +12,10 @@ export const useTableData = () => {
       const data = await storage.get("tableData")
       if (!data || data.length === 0) return
 
-      console.log("Fetched raw table data:", data)
+      // console.log("Fetched raw table data:", data)
 
       let processedData = []
-
-      // 🧠 Format A: From #to-select-to
+      //format A
       if (data[0]?.["Disp Code"]) {
         processedData = data.flatMap((row) => {
           const baseCode = row["Disp Code"] || ""
@@ -41,14 +41,15 @@ export const useTableData = () => {
           return results
         })
       }
-      // 🔄 Format B: With Sec./Subjcode
+      //  Format B
       else {
         let prevSecSubjcode = ""
 
         processedData = data
           .filter((row) => row["Days"])
           .map((row) => {
-            let secSubjcode = `${row["Sec."] || ""}-${row["Subjcode"] || ""}`.trim()
+            let secSubjcode =
+              `${row["Sec."] || ""}-${row["Subjcode"] || ""}`.trim()
 
             if (secSubjcode === "-") {
               secSubjcode = prevSecSubjcode
