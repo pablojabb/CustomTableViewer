@@ -12,7 +12,7 @@ const TablePage = () => {
   }
 
   return (
-    <div className="p-4 dark:bg-dark-bg">
+    <div className="p-4 dark:bg-dark-bg bg-light-bg">
       <Table tableData={tableData} />
       <div className=" flex justify-center items-center">
         <button

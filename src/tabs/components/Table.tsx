@@ -18,7 +18,6 @@ const Table = ({ tableData }) => {
     }
   })
 
-  // Ensure `useScheduleEvents` is always called even when tableData is empty
   const { vacantDays, events, conflictGroups } =
     useScheduleEvents(tableData)
 
