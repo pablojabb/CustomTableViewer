@@ -3,10 +3,10 @@ import timeGridPlugin from "@fullcalendar/timegrid"
 import { useToJpeg } from "@hugocxl/react-to-image"
 import { FiArrowDownCircle } from "react-icons/fi"
 
-import DarkModeToggle from "~DarkModeToggle "
+import DarkModeToggle from "~darkModeToggle"
 
 import useScheduleEvents from "./../hook/useScheduleEvents"
-import SummaryCard from "./SummaryCard"
+import SummaryCard from "./summaryCard"
 
 const Table = ({ tableData }) => {
   const [state, convertToJpeg, ref] = useToJpeg<HTMLDivElement>({

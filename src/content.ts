@@ -27,33 +27,37 @@ const highlightTable = (index: number) => {
 
 const extractTableData = async () => {
   const storage = new Storage()
-  const tables = document.querySelectorAll("table")
 
+  const tables = document.querySelectorAll("table")
   if (tables.length === 0) return null
 
   const table = tables[currentIndex]
+  const isDataTable = table.id === "to-select-to"
 
   const originalBorder = table.style.border
   table.style.border = ""
 
   try {
-    const headers = Array.from(table.querySelectorAll("th")).map((th) =>
-      th.innerText.trim()
-    )
+const headers = Array.from(table.querySelectorAll("thead th"))
+  .slice(1) // Skip the icon column
+  .map((th) => (th as HTMLTableCellElement).innerText.trim())
 
-    const rows = Array.from(table.querySelectorAll("tr"))
-      .slice(1)
-      .map((tr) => {
-        const cells = Array.from(tr.querySelectorAll("td")).map((td) =>
-          td.innerText.trim()
-        )
-        return Object.fromEntries(
-          headers.map((header, i) => [header, cells[i] || ""])
-        )
-      })
+const rows = Array.from(table.querySelectorAll("tbody tr")).map((tr) => {
+  const cells = Array.from(tr.querySelectorAll("td"))
+    .slice(1) // Skip the icon cell
+    .map((td) => {
+      const hiddenInput = td.querySelector("input[type='hidden']") as HTMLInputElement | null
+      return hiddenInput ? hiddenInput.value.trim() : (td as HTMLTableCellElement).innerText.trim()
+    })
+
+  return Object.fromEntries(
+    headers.map((header, i) => [header, cells[i] || ""])
+  )
+})
+
+
 
     await storage.set("tableData", rows)
-
     return rows.length > 0 ? "success" : null
   } finally {
     table.style.border = originalBorder
@@ -78,6 +82,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         status: result === "success" ? "Table extracted" : "no_tabledata"
       })
     })
-    return true
+    return true // keeps the message channel open for async
   }
 })

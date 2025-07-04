@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-
 import { Storage } from "@plasmohq/storage"
 
 const storage = new Storage()
@@ -10,34 +9,62 @@ export const useTableData = () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await storage.get("tableData")
+      if (!data || data.length === 0) return
 
-      if (!data || data.length === 0) {
-        return
-      }
-      console.log("Fetched table data:", data)
+      console.log("Fetched raw table data:", data)
 
-      let prevSecSubjcode = ""
+      let processedData = []
 
-      const filteredData = data
-        .filter((row) => row["Days"])
-        .map((row) => {
-          let secSubjcode =
-            `${row["Sec."] || ""}-${row["Subjcode"] || ""}`.trim()
+      // 🧠 Format A: From #to-select-to
+      if (data[0]?.["Disp Code"]) {
+        processedData = data.flatMap((row) => {
+          const baseCode = row["Disp Code"] || ""
+          const block = row["Block"] || ""
+          const results = []
 
-          if (secSubjcode === "-") {
-            secSubjcode = prevSecSubjcode
-          } else {
-            prevSecSubjcode = secSubjcode
+          if (row["Lec. Time"] && row["Lec. Days"]) {
+            results.push({
+              Days: row["Lec. Days"],
+              "Sec-Subjcode": `${block} - ${baseCode}-LEC`,
+              Time: row["Lec. Time"]
+            })
           }
 
-          return {
-            Days: row["Days"],
-            "Sec-Subjcode": secSubjcode,
-            Time: row["Time"] || ""
+          if (row["Lab. Time"] && row["Lab. Days"]) {
+            results.push({
+              Days: row["Lab. Days"],
+              "Sec-Subjcode": `${block} - ${baseCode}-LAB`,
+              Time: row["Lab. Time"]
+            })
           }
+
+          return results
         })
+      }
+      // 🔄 Format B: With Sec./Subjcode
+      else {
+        let prevSecSubjcode = ""
 
-      setTableData(filteredData)
+        processedData = data
+          .filter((row) => row["Days"])
+          .map((row) => {
+            let secSubjcode = `${row["Sec."] || ""}-${row["Subjcode"] || ""}`.trim()
+
+            if (secSubjcode === "-") {
+              secSubjcode = prevSecSubjcode
+            } else {
+              prevSecSubjcode = secSubjcode
+            }
+
+            return {
+              Days: row["Days"],
+              "Sec-Subjcode": secSubjcode,
+              Time: row["Time"] || ""
+            }
+          })
+      }
+
+      setTableData(processedData)
     }
 
     fetchData()

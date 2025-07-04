@@ -5,7 +5,7 @@ import { FiChevronLeft, FiChevronRight,FiSettings } from "react-icons/fi"
 import ReadMoreAccordion from "./accordionBox"
 import Footer from "~tabs/Footer"
 
-import DarkModeToggle from "./DarkModeToggle "
+import DarkModeToggle from "./darkModeToggle"
 
 function IndexPopup() {
   const [status, setStatus] = useState("No table data extracted")
@@ -14,9 +14,6 @@ function IndexPopup() {
     chrome.runtime.sendMessage({ action: "openNewTab" }, (response) => {})
   }
 
-  const openSettingstab = async () => {
-    chrome.runtime.sendMessage({ action: "openSettingstab" }, (response) => {})
-  }
 
   const handleExtractTable = async () => {
     setStatus("Extracting...")
@@ -92,20 +89,12 @@ function IndexPopup() {
 
   return (
     <>
-      <div className="w-[18rem] h-full flex flex-col justify-center items-center bg-light-bg dark:bg-dark-bg">
+      <div className=" w-[18rem] h-full flex flex-col justify-center items-center bg-light-bg dark:bg-dark-bg ">
         <header className="w-full flex justify-between items-center mb-4 py-1">
           <h1 className="text-lg font-bold font-sans my-1 text-light-important-text dark:text-dark-text text-center px-2">
             CTV
           </h1>
-          <div className="flex justify-center items-center">
-           
             <DarkModeToggle />
-             <button
-            onClick={() => {
-             openSettingstab()
-            }}
-            ><FiSettings className="text-xl text-dark-bg dark:text-dark-text mr-2" /></button>
-          </div>
 
         </header>
         <ReadMoreAccordion
