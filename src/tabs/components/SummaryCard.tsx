@@ -4,7 +4,7 @@ import Card from "./Card"
 const SummaryCard = ({ vacantDays = [], conflictGroups = [] }) => {
   const formattedVacantDays =
     vacantDays.length > 0 ? vacantDays.join(", ") : "None"
-  console.log("Conflict Groups:", conflictGroups)
+  // console.log("Conflict Groups:", conflictGroups)
   const formattedConflict =
     conflictGroups.length > 0
       ? conflictGroups

@@ -66,6 +66,7 @@ export const useTableData = () => {
       }
 
       setTableData(processedData)
+      console.log("Processed table data:", processedData)
     }
 
     fetchData()

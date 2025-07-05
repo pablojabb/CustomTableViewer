@@ -143,7 +143,7 @@ const useScheduleEvents = (schedule) => {
     const conflictSubjects = [
       ...new Set(conflictGroups.flatMap(g => g.subjects.map(s => s.title)))
     ]
-    console.log("conflictgroups", conflictGroups)
+    // console.log("conflictgroups", conflictGroups)
 
     return {
       events,
