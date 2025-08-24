@@ -1,58 +1,90 @@
-# CTV (Custom Table Viewer)
+# Custom Table Viewer
+## 🗂️ Description
 
-## Description
+The Custom Table Viewer is a Chrome extension designed to extract and visualize table data from web pages. It provides a user-friendly interface for users to view and interact with table data in a custom format. This project is ideal for developers and users who need to work with table data on a daily basis.
 
-CTV is a browser extension designed to help students instantly visualize their schedules by extracting table data from the university’s system (Pre-Registration & Schedule Pages) and transforming it into a well-structured timetable. It automatically detects conflicts, highlights overlapping time slots, and presents the schedule in a clearer format. This removes the hassle of manually checking for conflicts, allowing students to resolve issues quickly and plan their time better—without long waiting times or unnecessary stress.
+The extension uses a combination of content scripts, background scripts, and popup UI to extract table data from web pages and display it in a customizable format. With features like data visualization, conflict detection, and vacant day highlighting, the Custom Table Viewer is a powerful tool for anyone working with table data.
 
-## Installation & Setup
+## ✨ Key Features
 
-### Download
+* **Table Data Extraction**: Extract table data from web pages using content scripts
+* **Data Visualization**: Visualize table data in a custom format using FullCalendar library
+* **Conflict Detection**: Detect conflicts and vacant days in the table data
+* **Customizable**: Customize the appearance and behavior of the extension using various options
+* **User-Friendly Interface**: User-friendly popup UI for easy interaction with table data
 
-[Download CTV Extension](https://github.com/pablojabb/CustomTableViewer/releases/tag/v1.2.0)
+## 🗂️ Folder Structure
 
-### Installation Guide
+```mermaid
+graph TD;
+  src-->tabs;
+  src-->components;
+  src-->hooks;
+  src-->lib;
+  src-->background;
+  src-->content;
+  CTV-->chrome-mv3-dev;
+  chrome-mv3-dev-->popup.html;
+  chrome-mv3-dev-->tabs;
+```
 
-1. **Download the extension files** from the link above.
-2. **Extract the ZIP file (if in .ZIP format)** to a folder on your computer.
-3. **Open Chrome and go to** `chrome://extensions/`.
-4. **Enable Developer mode** (top-right corner).
-5. **Click "Load unpacked"** and select the extracted folder.
-6. The extension should now be installed and ready to use.
+## 🛠️ Tech Stack
 
-### Video Guide
+![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?logo=typescript&logoColor=white&style=for-the-badge)
+![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white&style=for-the-badge)
+![FullCalendar](https://img.shields.io/badge/FullCalendar-4ea94b?logo=fullcalendar&logoColor=white&style=for-the-badge)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=white&style=for-the-badge)
+![Chrome Extension](https://img.shields.io/badge/Chrome%20Extension-4285F4?logo=google-chrome&logoColor=white&style=for-the-badge)
 
-[How To Install Unpacked Extensions In Google Chrome - Full Guide](https://youtu.be/NH5CPm9pyts?si=mrQzDJGgTOjDVLN3)
+## ⚙️ Setup Instructions
 
-## Contributing
+To run the project locally, follow these steps:
 
-## Features
+* Git clone the repository: `https://github.com/pablojabb/CustomTableViewer.git`
+* Install dependencies: `npm install`
+* Start the development server: `npm run dev`
+* Load the extension in Chrome: Go to `chrome://extensions/`, enable developer mode, and click "Load unpacked". Select the `CTV/chrome-mv3-dev` folder.
 
-- 🔍 Navigate through tables one by one with **auto-scroll** and a **yellow highlighter** for focus  
-- 🖼️ **Download** the generated timetable as a **JPEG image**  
-- 🌗 Supports **Light** and **Dark** mode for better accessibility and preference
+## 🤖 GitHub Actions
+
+The project uses a GitHub Actions workflow to submit the extension to the Chrome Web Store. The workflow is defined in `.github/workflows/submit.yml`.
+
+## 📦 Files and Directories
+
+The project consists of the following files and directories:
+
+* `postcss.config.js`: PostCSS configuration file
+* `src/lib/utils.ts`: Utility file for merging class names
+* `tsconfig.json`: TypeScript configuration file
+* `.gitignore`: Git ignore file
+* `CTV/chrome-mv3-dev`: Chrome extension files
+* `src/background`: Background script
+* `src/tabs`: Tab components
+* `src/components`: React components
+* `src/hooks`: Custom React hooks
+* `src/content.ts`: Content script
+
+## 📝 Code Organization
+
+The code is organized into the following sections:
+
+* `src/background`: Background script
+* `src/tabs`: Tab components
+* `src/components`: React components
+* `src/hooks`: Custom React hooks
+* `src/lib`: Utility files
+* `CTV/chrome-mv3-dev`: Chrome extension files
 
 
-![CTV Preview](CTV/preview.png)
 
-## Reporting Issues, Bugs, or Problems
-
-Encountered a problem? Let me know!
-
-📧 **Email:** jumayaanthony@gmail.com
-
-📂 **Create an issue on this repository**
-
-1. Go to the **Issues** tab in the repository.
-2. Click **New Issue**.
-3. Provide a descriptive title and details.
-4. Click **Submit new issue**.
-
-💡 Your feedback helps me improve this Chrome extension. 🚀 Thanks for your support! 🙌
-
-## Contributing
-
-If you’d like to contribute, feel free to fork the repository and submit a pull request.
-
-## License
-
-MIT License
+<br><br>
+<div align="center">
+<img src="https://avatars.githubusercontent.com/u/142668163?v=4" width="120" />
+<h3>Ant_Jumaya</h3>
+<p>sUPP</p>
+</div>
+<br>
+<p align="right">
+<img src="https://gitfull.vercel.app/appLogo.png" width="20"/>  <a href="https://gitfull.vercel.app">Made by GitFull</a>
+</p>
+    
